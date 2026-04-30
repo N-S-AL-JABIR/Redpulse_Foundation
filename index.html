@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Redpulse Foundation – Dhaka's Blood Donation Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     EMERGENCY TICKER
+     ============================================================ -->
+<!-- <div class="emergency-bar">
+  <i class="fas fa-exclamation-triangle"></i>
+  <span>URGENT: O− blood critically needed at Dhaka Medical College Hospital</span>
+  <span style="opacity:0.5">|</span>
+  <span>Hotline: <strong>+880 1800-REDPULSE</strong></span>
+  <span style="opacity:0.5">|</span>
+  <span>24/7 Emergency Response Active</span>
+</div> -->
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="navbar">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a href="#home" class="nav-brand">
+      <div class="pulse-icon"><i class="fas fa-droplet" style="color:#fff"></i></div>
+      Redpulse Foundation
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#donor">Become Donor</a></li>
+      <li><a href="#request">Request Blood</a></li>
+      <li><a href="#cardgen">Donor Card</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="d-flex align-items-center gap-3">
+      <a href="#donor" class="btn-red d-none d-lg-inline-flex">
+        <i class="fas fa-heart"></i><span>Donate Now</span>
+      </a>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#donor" onclick="closeMenu()">Become a Donor</a>
+  <a href="#request" onclick="closeMenu()">Request Blood</a>
+  <a href="#cardgen" onclick="closeMenu()">Donor Card Generator</a>
+  <a href="#events" onclick="closeMenu()">Events</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#donor" class="btn-red mt-2" style="justify-content:center" onclick="closeMenu()"><i class="fas fa-heart"></i><span>Donate Now</span></a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-orb"></div>
+
+  <!-- SVG Blood Drop -->
+  <svg class="hero-drop" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="dropGrad" cx="40%" cy="30%" r="70%">
+        <stop offset="0%" stop-color="#ff4466" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#8b0000" stop-opacity="1"/>
+      </radialGradient>
+    </defs>
+    <path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="url(#dropGrad)"/>
+    <ellipse cx="75" cy="120" rx="18" ry="28" fill="rgba(255,255,255,0.12)" transform="rotate(-20 75 120)"/>
+    <circle cx="100" cy="175" r="4" fill="rgba(255,255,255,0.2)"/>
+  </svg>
+
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            DHAKA, BANGLADESH · SINCE 2018
+          </div>
+
+          <div class="hero-headline display-xl">
+            Every Drop<br/><em>Saves a</em><br/>Life
+          </div>
+
+          <p class="hero-sub">
+            Connecting voluntary blood donors with patients in critical need across Dhaka and beyond. Join Bangladesh's most trusted blood donation network.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#donor" class="btn-red">
+              <i class="fas fa-heart"></i><span>Become a Donor</span>
+            </a>
+            <a href="#request" class="btn-ghost">
+              <i class="fas fa-hand-holding-medical"></i><span>Request Blood</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <div class="hero-stat-num stat-counter" data-target="12400">0</div>
+              <div class="hero-stat-label">Registered Donors</div>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div>
+              <div class="hero-stat-num stat-counter" data-target="8900">0</div>
+              <div class="hero-stat-label">Lives Saved</div>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div>
+              <div class="hero-stat-num stat-counter" data-target="64">0</div>
+              <div class="hero-stat-label">Partner Hospitals</div>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div>
+              <div class="hero-stat-num">24/7</div>
+              <div class="hero-stat-label">Emergency Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="wheel"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- ============================================================
+     TICKER
+     ============================================================ -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker-inner">
+    <span>O+ NEEDED URGENTLY</span><span class="sep">◆</span>
+    <span>DONORS REWARDED WITH PRIORITY ACCESS</span><span class="sep">◆</span>
+    <span>JOIN 12,400+ DONORS IN DHAKA</span><span class="sep">◆</span>
+    <span>FREE BLOOD TYPING CAMP · JUNE 15</span><span class="sep">◆</span>
+    <span>AB− RARE: CRITICAL SHORTAGE</span><span class="sep">◆</span>
+    <span>DONATE EVERY 3 MONTHS · STAY ELIGIBLE</span><span class="sep">◆</span>
+    <span>O+ NEEDED URGENTLY</span><span class="sep">◆</span>
+    <span>DONORS REWARDED WITH PRIORITY ACCESS</span><span class="sep">◆</span>
+    <span>JOIN 12,400+ DONORS IN DHAKA</span><span class="sep">◆</span>
+    <span>FREE BLOOD TYPING CAMP · JUNE 15</span><span class="sep">◆</span>
+    <span>AB− RARE: CRITICAL SHORTAGE</span><span class="sep">◆</span>
+    <span>DONATE EVERY 3 MONTHS · STAY ELIGIBLE</span><span class="sep">◆</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" class="section-wrap">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <div class="about-img-grid">
+          <div class="img-card tall">
+            <div class="about-img-placeholder" style="aspect-ratio:0.65">
+              <i class="fas fa-users fa-2x" style="color:var(--crimson);opacity:0.5"></i>
+              <span>Donors at Camp</span>
+            </div>
+          </div>
+          <div class="img-card">
+            <div class="about-img-placeholder">
+              <i class="fas fa-hospital fa-2x" style="color:var(--crimson);opacity:0.5"></i>
+              <span>Hospital Partner</span>
+            </div>
+          </div>
+          <div class="img-card">
+            <div class="about-img-placeholder">
+              <i class="fas fa-hand-holding-heart fa-2x" style="color:var(--crimson);opacity:0.5"></i>
+              <span>Volunteer Team</span>
+            </div>
+          </div>
+          <div class="glass-red about-badge">
+            <span class="num">6+</span>
+            <span style="font-size:0.72rem;color:var(--muted)">Years of Service</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7 reveal" style="transition-delay:0.15s">
+        <div class="section-head">
+          <div class="section-label mb-2">About Redpulse</div>
+          <h2 class="section-title mb-4">We Are the Bridge Between Life and Hope</h2>
+          <p class="text-muted mb-4" style="font-size:1rem;line-height:1.8">
+            Founded in 2018 in Dhaka, Redpulse Foundation is a non-profit humanitarian organization dedicated to building a sustainable voluntary blood donation ecosystem across Bangladesh. We connect willing donors with patients facing medical emergencies — every day, around the clock.
+          </p>
+          <p class="text-muted" style="font-size:0.95rem;line-height:1.8">
+            Through awareness drives, organized donation camps, and a digital network of verified donors, we've built Bangladesh's most trusted platform for blood donation — free, fast, and life-saving.
+          </p>
+        </div>
+
+        <ul class="mission-list">
+          <li>
+            <div class="icon"><i class="fas fa-shield-heart"></i></div>
+            <div>
+              <div style="font-weight:600;color:var(--snow);margin-bottom:2px">100% Voluntary & Free</div>
+              <div class="text-muted" style="font-size:0.875rem">All donations are voluntary. Patients never pay for blood — ever.</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <div style="font-weight:600;color:var(--snow);margin-bottom:2px">24/7 Emergency Network</div>
+              <div class="text-muted" style="font-size:0.875rem">Our rapid response team operates round the clock for emergencies.</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon"><i class="fas fa-certificate"></i></div>
+            <div>
+              <div style="font-weight:600;color:var(--snow);margin-bottom:2px">Medically Verified Donors</div>
+              <div class="text-muted" style="font-size:0.875rem">Every donor is health-screened and registered with government approval.</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon"><i class="fas fa-map-location-dot"></i></div>
+            <div>
+              <div style="font-weight:600;color:var(--snow);margin-bottom:2px">Citywide Coverage</div>
+              <div class="text-muted" style="font-size:0.875rem">64 partner hospitals and clinics across Dhaka and nearby districts.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BECOME A DONOR
+     ============================================================ -->
+<section id="donor" class="section-wrap">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center reveal">
+        <div class="section-label mb-2">Become a Donor</div>
+        <h2 class="section-title mb-3">Register as a Blood Hero</h2>
+        <p class="text-muted">Complete the form below to join our verified donor network. Your information is secure and only shared in life-saving situations.</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8 reveal">
+        <div class="glass form-card">
+          <!-- DRF NOTE: POST /api/donors/ -->
+          <form id="donor-form" data-api-endpoint="/api/donors/" method="POST">
+            <div class="form-row">
+              <div class="form-field">
+                <label>Full Name *</label>
+                <input type="text" name="full_name" placeholder="Sabbir Ahmed" required />
+              </div>
+              <div class="form-field">
+                <label>Date of Birth *</label>
+                <input type="date" name="dob" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>Phone Number *</label>
+                <input type="tel" name="phone" placeholder="+880 1X-XXXXXXXX" required />
+              </div>
+              <div class="form-field">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="you@example.com" />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Blood Group *</label>
+              <div class="blood-group-grid" id="blood-group-grid">
+                <div class="blood-chip" data-group="A+">A+</div>
+                <div class="blood-chip" data-group="A−">A−</div>
+                <div class="blood-chip" data-group="B+">B+</div>
+                <div class="blood-chip" data-group="B−">B−</div>
+                <div class="blood-chip" data-group="O+">O+</div>
+                <div class="blood-chip" data-group="O−">O−</div>
+                <div class="blood-chip" data-group="AB+">AB+</div>
+                <div class="blood-chip" data-group="AB−">AB−</div>
+              </div>
+              <input type="hidden" name="blood_group" id="selected-blood-group" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>Division *</label>
+                <select name="division" required>
+                  <option value="" disabled selected>Select Division</option>
+                  <option>Dhaka</option>
+                  <option>Chittagong</option>
+                  <option>Sylhet</option>
+                  <option>Rajshahi</option>
+                  <option>Khulna</option>
+                  <option>Barisal</option>
+                  <option>Mymensingh</option>
+                  <option>Rangpur</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label>District *</label>
+                <input type="text" name="district" placeholder="e.g. Dhaka" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Address / Thana</label>
+              <input type="text" name="address" placeholder="Dhanmondi, Dhaka" />
+            </div>
+
+            <div class="form-field">
+              <label>Last Donation Date (if any)</label>
+              <input type="date" name="last_donation" />
+            </div>
+
+            <div class="form-field">
+              <label>Medical Notes (Optional)</label>
+              <textarea name="medical_notes" placeholder="Any relevant medical information..."></textarea>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 flex-wrap mt-2">
+              <button type="submit" class="btn-red">
+                <i class="fas fa-user-plus"></i><span>Register as Donor</span>
+              </button>
+              <p class="text-muted mb-0" style="font-size:0.8rem"><i class="fas fa-lock me-1" style="color:var(--crimson)"></i>Your data is encrypted and private.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REQUEST BLOOD
+     ============================================================ -->
+<section id="request" class="section-wrap">
+  <div class="container">
+    <div class="row align-items-start g-5">
+      <div class="col-lg-5 reveal">
+        <div class="section-label mb-2">Request Blood</div>
+        <h2 class="section-title mb-3">Need Blood Now?</h2>
+        <p class="text-muted mb-4">Submit an urgent blood request and our team will connect you with verified donors within minutes. Available for all blood groups.</p>
+
+        <!-- Current Needs -->
+        <h6 style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Current Shortage Alerts</h6>
+
+        <div class="d-flex flex-column gap-3">
+          <div class="glass blood-need-card">
+            <div class="blood-need-header">
+              <div class="blood-type-badge">O−</div>
+              <div class="urgency-pill critical">Critical</div>
+            </div>
+            <div class="blood-need-location"><i class="fas fa-location-dot"></i>Dhaka Medical College, Shahbag</div>
+            <div class="goal-bar"><div class="goal-fill" data-width="15"></div></div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:4px">3 units needed · 0 fulfilled</div>
+          </div>
+
+          <div class="glass blood-need-card">
+            <div class="blood-need-header">
+              <div class="blood-type-badge">AB+</div>
+              <div class="urgency-pill moderate">Moderate</div>
+            </div>
+            <div class="blood-need-location"><i class="fas fa-location-dot"></i>Square Hospital, Panthapath</div>
+            <div class="goal-bar"><div class="goal-fill" data-width="55"></div></div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:4px">4 units needed · 2 fulfilled</div>
+          </div>
+
+          <div class="glass blood-need-card">
+            <div class="blood-need-header">
+              <div class="blood-type-badge">B+</div>
+              <div class="urgency-pill stable">Stable</div>
+            </div>
+            <div class="blood-need-location"><i class="fas fa-location-dot"></i>BSMMU Hospital, Shahbag</div>
+            <div class="goal-bar"><div class="goal-fill" data-width="80"></div></div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:4px">2 units needed · 1 fulfilled</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7 reveal" style="transition-delay:0.15s">
+        <div class="glass form-card">
+          <!-- DRF NOTE: POST /api/blood-requests/ -->
+          <form id="request-form" data-api-endpoint="/api/blood-requests/" method="POST">
+            <div class="urgency-tabs">
+              <button type="button" class="urgency-tab active-tab" data-urgency="critical">🔴 Critical</button>
+              <button type="button" class="urgency-tab" data-urgency="urgent">🟠 Urgent</button>
+              <button type="button" class="urgency-tab" data-urgency="routine">🟡 Routine</button>
+            </div>
+            <input type="hidden" name="urgency" id="urgency-value" value="critical" />
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>Patient Name *</label>
+                <input type="text" name="patient_name" placeholder="Name of Patient" required />
+              </div>
+              <div class="form-field">
+                <label>Attendant Name *</label>
+                <input type="text" name="attendant_name" placeholder="Your Name" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Blood Group Required *</label>
+              <div class="blood-group-grid" id="req-blood-group-grid">
+                <div class="blood-chip" data-group="A+">A+</div>
+                <div class="blood-chip" data-group="A−">A−</div>
+                <div class="blood-chip" data-group="B+">B+</div>
+                <div class="blood-chip" data-group="B−">B−</div>
+                <div class="blood-chip" data-group="O+">O+</div>
+                <div class="blood-chip" data-group="O−">O−</div>
+                <div class="blood-chip" data-group="AB+">AB+</div>
+                <div class="blood-chip" data-group="AB−">AB−</div>
+              </div>
+              <input type="hidden" name="blood_group" id="req-selected-blood-group" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>Units Required *</label>
+                <input type="number" name="units" placeholder="e.g. 2" min="1" max="20" required />
+              </div>
+              <div class="form-field">
+                <label>Required Date *</label>
+                <input type="date" name="required_date" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Hospital / Clinic *</label>
+              <input type="text" name="hospital" placeholder="Hospital name and address" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>Contact Phone *</label>
+                <input type="tel" name="contact_phone" placeholder="+880 1X-XXXXXXXX" required />
+              </div>
+              <div class="form-field">
+                <label>Ward / Room No.</label>
+                <input type="text" name="ward_room" placeholder="Ward 5, Bed 12" />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Additional Notes</label>
+              <textarea name="notes" placeholder="Any additional information for the donor..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-red">
+              <i class="fas fa-paper-plane"></i><span>Submit Request</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DONOR CARD GENERATOR
+     ============================================================ -->
+<section id="cardgen" class="section-wrap">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center reveal">
+        <div class="section-label mb-2">Social Sharing</div>
+        <h2 class="section-title mb-3">Donor Photo Card Generator</h2>
+        <p class="text-muted">Create a stunning shareable card to inspire your friends and family to donate blood.</p>
+      </div>
+    </div>
+
+    <div class="generator-layout reveal">
+      <!-- Controls -->
+      <div>
+        <div class="glass form-card">
+          <div class="form-field">
+            <label>Your Name</label>
+            <input type="text" id="card-name" placeholder="Sabbir Ahmed" oninput="updateCard()" />
+          </div>
+
+          <div class="form-field">
+            <label>Blood Group</label>
+            <div class="blood-group-grid" id="card-blood-grid">
+              <div class="blood-chip" data-group="A+">A+</div>
+              <div class="blood-chip" data-group="A−">A−</div>
+              <div class="blood-chip selected" data-group="B+">B+</div>
+              <div class="blood-chip" data-group="B−">B−</div>
+              <div class="blood-chip" data-group="O+">O+</div>
+              <div class="blood-chip" data-group="O−">O−</div>
+              <div class="blood-chip" data-group="AB+">AB+</div>
+              <div class="blood-chip" data-group="AB−">AB−</div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Custom Message</label>
+            <textarea id="card-message" rows="3" placeholder="I donate blood because every life matters. Join me!" oninput="updateCard()">I donate blood because every life matters. Join me!</textarea>
+          </div>
+
+          <div class="form-field">
+            <label>Card Theme</label>
+            <div class="template-selector">
+              <div class="template-dot active" data-theme="crimson" style="background:linear-gradient(135deg,#C0162C,#8b0000)" title="Crimson"></div>
+              <div class="template-dot" data-theme="midnight" style="background:linear-gradient(135deg,#1a1a2e,#16213e)" title="Midnight"></div>
+              <div class="template-dot" data-theme="maroon" style="background:linear-gradient(135deg,#4a0010,#800020)" title="Maroon"></div>
+              <div class="template-dot" data-theme="rose" style="background:linear-gradient(135deg,#6b1530,#c2185b)" title="Rose"></div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3 flex-wrap mt-2">
+            <button class="btn-red" onclick="downloadCard()">
+              <i class="fas fa-download"></i><span>Download Card</span>
+            </button>
+            <button class="btn-ghost" onclick="shareCard()">
+              <i class="fas fa-share-nodes"></i><span>Share</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview -->
+      <div>
+        <div id="donor-card-preview">
+          <div class="card-preview-inner" id="card-inner">
+            <div class="card-org">REDPULSE FOUNDATION · DHAKA, BANGLADESH</div>
+
+            <div class="card-blood-display">
+              <div class="card-drop-icon"><i class="fas fa-droplet"></i></div>
+              <div class="card-blood-group" id="preview-blood-group">B+</div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);font-family:var(--font-mono);letter-spacing:0.15em;text-transform:uppercase;margin-top:6px">Blood Group</div>
+            </div>
+
+            <div>
+              <div class="card-donor-name" id="preview-name">Your Name</div>
+              <div class="card-message" id="preview-message">I donate blood because every life matters. Join me!</div>
+            </div>
+
+            <div class="card-footer-bar">
+              <div class="card-heart-row">
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+              </div>
+              <span>redpulsefoundation.org</span>
+              <span>PROUD DONOR</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-muted text-center mt-3" style="font-size:0.8rem">
+          <i class="fas fa-info-circle me-1" style="color:var(--crimson)"></i>
+          Share on Facebook, Instagram, or WhatsApp to inspire others.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOOD COMPATIBILITY WIDGET
+     ============================================================ -->
+<div class="section-wrap" style="padding:60px 0;background:var(--ink-mid)">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center reveal">
+        <div class="section-label mb-2">Quick Reference</div>
+        <h3 class="section-title mb-2">Blood Type Compatibility</h3>
+        <p class="text-muted mb-4">Click a blood group to see who it can donate to and receive from.</p>
+
+        <div class="compat-grid" id="compat-grid">
+          <div class="compat-cell" data-can-give="A+,AB+" data-can-receive="A+,A−,O+,O−">
+            A+<span class="label-sm">Common</span>
+          </div>
+          <div class="compat-cell" data-can-give="A+,A−,AB+,AB−" data-can-receive="A−,O−">
+            A−<span class="label-sm">Rare</span>
+          </div>
+          <div class="compat-cell" data-can-give="B+,AB+" data-can-receive="B+,B−,O+,O−">
+            B+<span class="label-sm">Common</span>
+          </div>
+          <div class="compat-cell" data-can-give="B+,B−,AB+,AB−" data-can-receive="B−,O−">
+            B−<span class="label-sm">Rare</span>
+          </div>
+          <div class="compat-cell" data-can-give="A+,B+,O+,AB+" data-can-receive="O+,O−">
+            O+<span class="label-sm">Universal+</span>
+          </div>
+          <div class="compat-cell" data-can-give="All" data-can-receive="O−">
+            O−<span class="label-sm">Universal</span>
+          </div>
+          <div class="compat-cell" data-can-give="AB+" data-can-receive="All">
+            AB+<span class="label-sm">Receiver</span>
+          </div>
+          <div class="compat-cell" data-can-give="AB+,AB−" data-can-receive="AB−,A−,B−,O−">
+            AB−<span class="label-sm">Rare</span>
+          </div>
+        </div>
+
+        <div id="compat-info" class="glass mt-4 p-4 text-start" style="display:none">
+          <div class="d-flex gap-4 flex-wrap">
+            <div>
+              <div class="section-label mb-1">Can Donate To</div>
+              <div id="can-give" style="color:var(--snow);font-family:var(--font-mono)"></div>
+            </div>
+            <div style="width:1px;background:var(--border)"></div>
+            <div>
+              <div class="section-label mb-1">Can Receive From</div>
+              <div id="can-receive" style="color:var(--snow);font-family:var(--font-mono)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     EVENTS
+     ============================================================ -->
+<section id="events" class="section-wrap">
+  <div class="container">
+    <div class="row justify-content-between align-items-end mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-label mb-2">Upcoming Events</div>
+        <h2 class="section-title">Blood Donation Camps &amp; Drives</h2>
+      </div>
+      <div class="col-auto reveal">
+        <!-- DRF NOTE: GET /api/events/ -->
+        <a href="#" class="btn-ghost"><span>View All Events</span><i class="fas fa-arrow-right ms-2"></i></a>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-6 reveal">
+        <div class="glass event-card">
+          <div class="event-date-box">
+            <div class="day">15</div>
+            <div class="mon">JUN</div>
+          </div>
+          <div class="flex-grow-1">
+            <div class="event-tag">Blood Camp</div>
+            <div class="event-title">Dhaka Summer Donation Drive 2026</div>
+            <div class="event-meta">
+              <span><i class="fas fa-clock"></i>9:00 AM – 4:00 PM</span>
+              <span><i class="fas fa-location-dot"></i>TSC, Dhaka University</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 reveal" style="transition-delay:0.1s">
+        <div class="glass event-card">
+          <div class="event-date-box">
+            <div class="day">22</div>
+            <div class="mon">JUN</div>
+          </div>
+          <div class="flex-grow-1">
+            <div class="event-tag" style="background:rgba(234,179,8,0.15);color:#fbbf24;border-color:rgba(234,179,8,0.3)">Awareness</div>
+            <div class="event-title">Youth Blood Hero Workshop</div>
+            <div class="event-meta">
+              <span><i class="fas fa-clock"></i>10:00 AM – 1:00 PM</span>
+              <span><i class="fas fa-location-dot"></i>BUET Campus, Polashi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 reveal" style="transition-delay:0.2s">
+        <div class="glass event-card">
+          <div class="event-date-box">
+            <div class="day">05</div>
+            <div class="mon">JUL</div>
+          </div>
+          <div class="flex-grow-1">
+            <div class="event-tag">Blood Camp</div>
+            <div class="event-title">Corporate Blood Donation Day</div>
+            <div class="event-meta">
+              <span><i class="fas fa-clock"></i>8:00 AM – 3:00 PM</span>
+              <span><i class="fas fa-location-dot"></i>Bashundhara City, Panthapath</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 reveal" style="transition-delay:0.3s">
+        <div class="glass event-card">
+          <div class="event-date-box">
+            <div class="day">14</div>
+            <div class="mon">JUL</div>
+          </div>
+          <div class="flex-grow-1">
+            <div class="event-tag" style="background:rgba(99,102,241,0.15);color:#a5b4fc;border-color:rgba(99,102,241,0.3)">Seminar</div>
+            <div class="event-title">National Blood Day Celebration</div>
+            <div class="event-meta">
+              <span><i class="fas fa-clock"></i>All Day Event</span>
+              <span><i class="fas fa-location-dot"></i>National Museum, Shahbag</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY
+     ============================================================ -->
+<section id="gallery" class="section-wrap">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center reveal">
+        <div class="section-label mb-2">Our Gallery</div>
+        <h2 class="section-title mb-3">Moments That Matter</h2>
+        <p class="text-muted">A glimpse into the lives we've touched and the heroes who made it possible.</p>
+      </div>
+    </div>
+
+    <!-- DRF NOTE: GET /api/gallery/ -->
+    <div class="gallery-masonry reveal">
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:280px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Donation Camp 2025</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:200px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Volunteer Team</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:240px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Hospital Handover</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:190px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Blood Awareness Walk</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:260px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Donor Appreciation Day</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:220px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Campus Drive BUET</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:180px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Youth Hero Awards</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:250px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Ramadan Special Drive</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="height:200px">
+          <i class="fas fa-camera fa-2x" style="color:var(--crimson);opacity:0.4"></i>
+          <span>Medical Team</span>
+        </div>
+        <div class="overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact" class="section-wrap">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center reveal">
+        <div class="section-label mb-2">Get in Touch</div>
+        <h2 class="section-title mb-3">We're Here for You</h2>
+        <p class="text-muted">Reach out for blood requests, donor registration support, or to partner with us.</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4 reveal">
+        <div class="glass contact-info-card">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <div class="contact-label">Emergency Hotline</div>
+              <div class="contact-value">+880 1800-REDPULSE</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">help@redpulsefoundation.org</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+            <div>
+              <div class="contact-label">Office Address</div>
+              <div class="contact-value">House 12, Road 5, Dhanmondi, Dhaka-1205</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <div class="contact-label">Office Hours</div>
+              <div class="contact-value">Sun – Thu: 9 AM – 6 PM</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="contact-label mb-2">Follow Us</div>
+            <div class="social-links">
+              <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 reveal" style="transition-delay:0.15s">
+        <div class="glass form-card">
+          <!-- DRF NOTE: POST /api/contact/ -->
+          <form id="contact-form" data-api-endpoint="/api/contact/" method="POST">
+            <div class="form-row">
+              <div class="form-field">
+                <label>Your Name *</label>
+                <input type="text" name="name" placeholder="Rafiq Islam" required />
+              </div>
+              <div class="form-field">
+                <label>Email *</label>
+                <input type="email" name="email" placeholder="you@example.com" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Subject *</label>
+              <select name="subject" required>
+                <option value="" disabled selected>Select a subject</option>
+                <option value="blood_request">Emergency Blood Request</option>
+                <option value="donor_support">Donor Registration Support</option>
+                <option value="partnership">Hospital / Organization Partnership</option>
+                <option value="volunteer">Volunteer Inquiry</option>
+                <option value="media">Media & Press</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="+880 1X-XXXXXXXX" />
+            </div>
+
+            <div class="form-field">
+              <label>Message *</label>
+              <textarea name="message" placeholder="Write your message here..." style="min-height:140px" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-red">
+              <i class="fas fa-paper-plane"></i><span>Send Message</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="nav-brand mb-3">
+          <div class="pulse-icon"><i class="fas fa-droplet" style="color:#fff"></i></div>
+          Redpulse Foundation
+        </div>
+        <p class="footer-desc">Bangladesh's most trusted voluntary blood donation network. Connecting donors with patients in critical need — every hour, every day.</p>
+        <div class="social-links mt-4">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#donor">Become Donor</a></li>
+          <li><a href="#request">Request Blood</a></li>
+          <li><a href="#cardgen">Donor Card</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Programs</div>
+        <ul class="footer-links">
+          <li><a href="#events">Events</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">Partner With Us</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="footer-heading">Emergency Helpline</div>
+        <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--crimson-glow);margin-bottom:8px">
+          +880 1800-REDPULSE
+        </div>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7">Available 24/7 for blood emergencies. Do not hesitate — call us and we will find a donor for you within minutes.</p>
+        <div class="glass-red mt-3 p-3" style="display:inline-block;border-radius:10px">
+          <span style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;color:var(--crimson-glow)">EMERGENCY LINE ACTIVE</span>
+          <span class="dot ms-2" style="display:inline-block;width:6px;height:6px;background:var(--crimson-glow);border-radius:50%;animation:blink 1.4s infinite"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom flex-wrap gap-3">
+      <span>© 2026 Redpulse Foundation. All rights reserved. Registered NGO, Bangladesh.</span>
+      <!-- <div class="d-flex gap-4">
+        <a href="#" style="color:rgba(255,255,255,0.3)">Privacy Policy</a>
+        <a href="#" style="color:rgba(255,255,255,0.3)">Terms of Service</a>
+        <a href="#" style="color:rgba(255,255,255,0.3)">DRF API Docs</a>
+      </div> -->
+       <p style="margin:0; font-size:0.78rem;"
+         >Built with ❤️ by Al Jabir</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Hidden canvas for card download -->
+<canvas id="card-canvas" width="840" height="1050"></canvas>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>
