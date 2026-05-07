@@ -367,7 +367,7 @@ body::before {
   font-family: var(--font-mono);
   color: var(--crimson-glow);
   background: rgba(192,22,44,0.1);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   animation: fade-up 0.8s 0.1s both;
 }
 
