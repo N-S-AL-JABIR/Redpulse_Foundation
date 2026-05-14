@@ -1,0 +1,148 @@
+/* ============================================================
+   REDPULSE FOUNDATION — RESPONSIVE OVERRIDES
+   ============================================================ */
+
+/* ── Breakpoints:
+   xs: <480px  |  sm: <640px  |  md: <768px
+   lg: <992px  |  xl: <1200px
+   ─────────────────────────────────────────────────────────── */
+
+/* ── Global Fluid Padding ─────────────────────────────────── */
+@media (max-width: 992px) {
+  .section-wrap { padding: 72px 0; }
+  .hero-stats   { gap: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  .section-wrap { padding: 56px 0; }
+  .section-title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+  .display-xl   { font-size: clamp(2.4rem, 9vw, 4rem); }
+
+  .form-row { grid-template-columns: 1fr; }
+  .generator-layout { grid-template-columns: 1fr; }
+
+  .hero-stats   { gap: 1.2rem; }
+  .hero-stat-divider { display: none; }
+
+  .gallery-masonry {
+    columns: 2;
+    gap: 10px;
+  }
+
+  /* About grid collapses */
+  .about-img-grid {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* Events */
+  .events-filter { flex-wrap: wrap; }
+
+  /* Donor list */
+  .donor-grid { grid-template-columns: repeat(2, 1fr); }
+  .filter-sidebar { display: none; }
+  .filter-mobile-toggle { display: flex; }
+}
+
+@media (max-width: 640px) {
+  .section-wrap { padding: 44px 0; }
+
+  .gallery-masonry { columns: 1; }
+
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn-red,
+  .hero-cta .btn-ghost { width: 100%; justify-content: center; }
+
+  .blood-group-grid { grid-template-columns: repeat(4, 1fr); }
+
+  /* Ticker smaller */
+  .ticker-inner span { font-size: 0.68rem; padding: 0 1rem; }
+
+  /* Donor card preview */
+  #donor-card-preview { max-width: 300px; }
+
+  /* Stats section */
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .donor-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .social-login { grid-template-columns: 1fr; }
+
+  .blood-group-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+  .blood-chip { padding: 8px 4px; font-size: 0.82rem; }
+
+  .form-card { padding: 24px 16px; }
+
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .university-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Navbar Responsive ────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-links { display: none !important; }
+  .hamburger { display: flex !important; }
+  .nav-cta-desktop { display: none !important; }
+}
+
+/* ── How It Works Steps ───────────────────────────────────── */
+@media (max-width: 768px) {
+  .steps-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .step-connector { display: none; }
+}
+
+/* ── University Carousel ──────────────────────────────────── */
+@media (max-width: 640px) {
+  .uni-carousel-track { gap: 12px; }
+  .uni-card { min-width: 140px; padding: 16px 10px; }
+}
+
+/* ── Gallery Lightbox ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .lightbox-img { max-height: 70vh; }
+  .lightbox-nav { padding: 0 12px; }
+}
+
+/* ── Profile Page ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .profile-header-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+  .profile-header-layout .profile-info { align-items: center; }
+  .profile-stats-row { justify-content: center; }
+  .profile-actions { justify-content: center; }
+}
+
+/* ── Moderator Dashboard ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .dash-sidebar { transform: translateX(-100%); }
+  .dash-sidebar.open { transform: translateX(0); }
+  .dash-main { margin-left: 0; }
+}
+
+/* ── Touch Optimisations ──────────────────────────────────── */
+@media (hover: none) {
+  .btn-red:hover,
+  .btn-ghost:hover { transform: none; }
+
+  .gallery-item .overlay { opacity: 0.4; }
+  .donor-card:hover { transform: none; }
+}
+
+/* ── Print ────────────────────────────────────────────────── */
+@media print {
+  #navbar, .mobile-menu, .ticker,
+  .dash-sidebar, .dash-topbar { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+}

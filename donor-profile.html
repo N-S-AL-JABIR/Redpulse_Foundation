@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Donor Profile — Redpulse Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="assets/css/style.css"/>
+<link rel="stylesheet" href="assets/css/animation.css"/>
+<link rel="stylesheet" href="assets/css/responsive.css"/>
+<style>
+.profile-banner{height:260px;background:linear-gradient(135deg,#1a0005 0%,#3d0010 45%,#8b0000 100%);position:relative;overflow:hidden;}
+.profile-banner-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;}
+.profile-avatar-wrap{position:absolute;bottom:-52px;left:50px;}
+.profile-avatar{width:104px;height:104px;border-radius:50%;border:4px solid var(--crimson);background:var(--ink-light);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--crimson-glow);font-weight:700;box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.profile-blood-ring{position:absolute;bottom:-8px;right:-8px;width:36px;height:36px;background:var(--crimson);border-radius:50%;border:2px solid var(--ink-mid);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:#fff;box-shadow:0 0 12px rgba(192,22,44,.6);}
+.profile-header-section{background:var(--ink-mid);border-bottom:1px solid var(--border);padding:68px 0 32px;}
+.profile-name{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--snow);line-height:1.2;}
+.profile-stats-row{display:flex;gap:24px;flex-wrap:wrap;margin-top:8px;}
+.profile-stat-val{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--snow);line-height:1;}
+.profile-stat-key{font-size:.72rem;color:var(--muted);margin-top:2px;}
+.toggle-switch{position:relative;width:40px;height:22px;cursor:pointer;}
+.toggle-switch input{opacity:0;width:0;height:0;}
+.slider{position:absolute;inset:0;background:rgba(255,255,255,.12);border-radius:22px;transition:.3s;}
+.slider::before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#888;border-radius:50%;transition:.3s;}
+.toggle-switch input:checked+.slider{background:rgba(34,197,94,.3);border:1px solid #22c55e;}
+.toggle-switch input:checked+.slider::before{transform:translateX(18px);background:#22c55e;}
+.history-row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.history-row:last-child{border-bottom:none;}
+.history-icon{width:36px;height:36px;background:rgba(192,22,44,.12);border:1px solid rgba(192,22,44,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--crimson-glow);font-size:.8rem;flex-shrink:0;}
+.history-hospital{font-size:.875rem;font-weight:600;color:var(--snow);}
+.history-date{font-size:.75rem;color:var(--muted);}
+.countdown-ring{width:120px;height:120px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0 auto 16px;}
+.countdown-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.countdown-ring circle{fill:none;stroke-width:7;}
+.ring-track{stroke:rgba(255,255,255,.06);}
+.ring-fill{stroke:var(--crimson);stroke-linecap:round;transition:stroke-dashoffset 1.2s ease;}
+.countdown-num{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--snow);position:relative;line-height:1;}
+.countdown-sub{font-size:.68rem;color:var(--muted);position:relative;}
+.social-card-preview{background:linear-gradient(145deg,#1a0005,#3d0010,#8b0000);border-radius:12px;padding:20px;text-align:center;position:relative;overflow:hidden;}
+.sc-blood{font-family:'Space Mono',monospace;font-size:2.4rem;font-weight:700;color:#fff;line-height:1;}
+.sc-name{font-size:.875rem;color:rgba(255,255,255,.7);margin-top:6px;}
+.sc-tag{font-size:.65rem;letter-spacing:.15em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:4px;}
+.elig-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:20px;font-size:.8rem;font-weight:600;}
+.elig-ok{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);}
+.elig-blue{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.3);}
+.elig-red{background:rgba(192,22,44,.12);color:var(--crimson-glow);border:1px solid rgba(192,22,44,.3);}
+.quick-action{display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.875rem;transition:.2s;margin-bottom:8px;}
+.quick-action:hover{border-color:rgba(192,22,44,.4);}
+</style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-drop"><svg viewBox="0 0 200 260" fill="none"><path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="#C0162C"/></svg></div></div>
+
+<nav id="navbar">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a href="index.html" class="nav-brand"><div class="pulse-icon"><i class="fas fa-droplet" style="color:#fff"></i></div>Redpulse Foundation</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="donor-list.html">Donors</a></li>
+      <li><a href="index.html#request">Request Blood</a></li><li><a href="events.html">Events</a></li>
+    </ul>
+    <div class="d-flex align-items-center gap-3">
+      <a href="dashboard.html" class="btn-red d-none d-lg-inline-flex"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()">Home</a><a href="donor-list.html" onclick="closeMenu()">Donors</a>
+  <a href="index.html#request" onclick="closeMenu()">Request Blood</a><a href="events.html" onclick="closeMenu()">Events</a>
+</div>
+
+<!-- Banner -->
+<div class="profile-banner" style="margin-top:72px;">
+  <div class="profile-banner-grid"></div>
+  <div id="particles-hero"></div>
+  <div class="container h-100 position-relative">
+    <div class="profile-avatar-wrap">
+      <div class="profile-avatar"><i class="fas fa-user"></i></div>
+      <div class="profile-blood-ring" id="profile-blood-ring">O+</div>
+    </div>
+  </div>
+</div>
+
+<!-- Profile Header -->
+<div class="profile-header-section">
+  <div class="container">
+    <div class="d-flex align-items-flex-end gap-4 flex-wrap">
+      <div>
+        <div class="profile-name" id="profile-name">Sabbir Ahmed</div>
+        <div id="profile-location-uni" style="font-size:.82rem;color:var(--muted);margin-top:4px;"><i class="fas fa-graduation-cap" style="color:var(--crimson-glow);margin-right:5px;"></i>BRACU · Mirpur, Dhaka</div>
+        <div class="profile-stats-row">
+          <div><div class="profile-stat-val" id="profile-total-donations">7</div><div class="profile-stat-key">Donations</div></div>
+          <!-- <div><div class="profile-stat-val" id="profile-lives-saved">7</div><div class="profile-stat-key">Lives Saved</div></div> -->
+          <div><div class="profile-stat-val" id="profile-member-since">3 yrs</div><div class="profile-stat-key">Member Since</div></div>
+        </div>
+      </div>
+      <div class="ms-auto d-flex gap-2 align-items-center flex-wrap">
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:10px 16px;">
+          <span id="profile-availability-text" style="font-size:.82rem;color:var(--muted);">Available</span>
+          <label class="toggle-switch"><input type="checkbox" checked onchange="toggleAvailability(this)" id="profile-availability-toggle"/><span class="slider"></span></label>
+        </div>
+        <a href="dashboard.html" class="btn-red"><i class="fas fa-edit"></i><span>Edit Profile</span></a>
+      </div>
+    </div>
+    <div class="d-flex gap-2 flex-wrap mt-3" id="profile-badges-container">
+      <span class="elig-badge elig-ok" id="badge-eligible"><i class="fas fa-check-circle"></i>Eligible to Donate</span>
+      <span class="elig-badge elig-blue" id="badge-verified"><i class="fas fa-certificate"></i>Verified Donor</span>
+      <span class="elig-badge elig-red" id="badge-hero"><i class="fas fa-award"></i>Blood Hero</span>
+    </div>
+  </div>
+</div>
+
+<!-- Content -->
+<section class="section-wrap" style="padding-top:48px;background:var(--ink);">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="glass p-4 mb-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h5 style="color:var(--snow);font-family:var(--font-display);margin:0;"><i class="fas fa-history" style="color:var(--crimson-glow);margin-right:8px;"></i>Donation History</h5>
+          </div>
+          <div class="history-row"><div class="history-icon"><i class="fas fa-droplet"></i></div><div class="flex-1"><div class="history-hospital">Dhaka Medical College Hospital</div><div class="history-date">10 Feb 2026 · Shahbag · 1 unit</div></div><span style="background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;white-space:nowrap;">Verified</span></div>
+          <div class="history-row"><div class="history-icon"><i class="fas fa-droplet"></i></div><div class="flex-1"><div class="history-hospital">Square Hospital</div><div class="history-date">15 Oct 2025 · Panthapath · 1 unit</div></div><span style="background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;white-space:nowrap;">Verified</span></div>
+          <div class="history-row"><div class="history-icon"><i class="fas fa-droplet"></i></div><div class="flex-1"><div class="history-hospital">BIRDEM General Hospital</div><div class="history-date">2 Jul 2025 · Shahbag · 1 unit</div></div><span style="background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;white-space:nowrap;">Verified</span></div>
+          <div class="history-row"><div class="history-icon"><i class="fas fa-droplet"></i></div><div class="flex-1"><div class="history-hospital">Ibn Sina Hospital</div><div class="history-date">19 Mar 2025 · Dhanmondi · 1 unit</div></div><span style="background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;white-space:nowrap;">Verified</span></div>
+        </div>
+        <div class="glass p-4">
+          <h5 style="color:var(--snow);font-family:var(--font-display);margin-bottom:12px;"><i class="fas fa-user" style="color:var(--crimson-glow);margin-right:8px;"></i>About</h5>
+          <p id="profile-about-text" style="color:var(--muted);font-size:.9rem;line-height:1.8;">Loading profile information...</p>
+          <div class="d-flex gap-3 mt-3 flex-wrap">
+            <div id="about-location" style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--muted);"><i class="fas fa-map-marker-alt" style="color:var(--crimson-glow);"></i>Location</div>
+            <div id="about-uni" style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--muted);"><i class="fas fa-graduation-cap" style="color:var(--crimson-glow);"></i>University</div>
+            <div id="about-blood" style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--muted);"><i class="fas fa-droplet" style="color:var(--crimson-glow);"></i>Blood Group</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="glass mb-4">
+          <div style="text-align:center;padding:24px;">
+            <div style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--crimson-glow);margin-bottom:16px;">Donation Eligibility</div>
+            <div class="countdown-ring">
+              <svg viewBox="0 0 120 120"><circle class="ring-track" cx="60" cy="60" r="52"/><circle class="ring-fill" id="countdown-ring-fill" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="0"/></svg>
+              <div class="countdown-num" id="countdown-days">90</div><div class="countdown-sub" id="countdown-text">days since</div>
+            </div>
+            <span class="elig-badge elig-ok" id="countdown-status" style="margin-bottom:10px;"><i class="fas fa-check-circle"></i>Ready to Donate!</span>
+            <p id="countdown-last-donation" style="font-size:.78rem;color:var(--muted);margin-top:8px;">Last donation: N/A<br/>You're fully eligible to donate again.</p>
+          </div>
+        </div>
+        <div class="glass p-4 mb-4">
+          <h5 style="color:var(--snow);font-family:var(--font-display);margin-bottom:12px;"><i class="fas fa-id-card" style="color:var(--crimson-glow);margin-right:8px;"></i>Social Donor Card</h5>
+          <div class="social-card-preview mb-3"><div class="sc-blood" id="sc-blood">O+</div><div class="sc-name" id="sc-name">Sabbir Ahmed</div><div class="sc-tag">Proud Blood Donor · Redpulse Foundation</div></div>
+          <a href="card-generator.html" class="btn-red" style="width:100%;justify-content:center;"><i class="fas fa-download"></i><span>Generate &amp; Download Card</span></a>
+        </div>
+        <div class="glass p-4">
+          <h5 style="color:var(--snow);font-family:var(--font-display);margin-bottom:14px;"><i class="fas fa-bolt" style="color:var(--crimson-glow);margin-right:8px;"></i>Quick Actions</h5>
+          <a href="dashboard.html" class="quick-action"><i class="fas fa-edit" style="color:var(--crimson-glow);width:16px;"></i>Edit Profile</a>
+          <a href="card-generator.html" class="quick-action"><i class="fas fa-share-alt" style="color:var(--crimson-glow);width:16px;"></i>Share My Card</a>
+          <a href="index.html#request" class="quick-action"><i class="fas fa-hand-holding-medical" style="color:var(--crimson-glow);width:16px;"></i>Request Blood</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/donor-profile.js"></script>
+</body>
+</html>

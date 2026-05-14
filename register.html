@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Register — Become a Donor | Redpulse Foundation</title>
+<meta name="description" content="Join Redpulse Foundation as a voluntary blood donor. Register your profile and start saving lives across Dhaka."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="assets/css/auth.css"/>
+<link rel="stylesheet" href="assets/css/animation.css"/>
+<style>
+.pass-strength-wrap { margin-top: 6px; }
+.pass-strength-track {
+  height: 4px; background: var(--ink-light); border-radius: 4px; overflow: hidden; margin-bottom: 4px;
+}
+#pass-strength { height: 100%; width: 0; border-radius: 4px; transition: width 0.4s, background 0.4s; }
+#pass-strength-label { font-size: 0.72rem; color: var(--muted); }
+.terms-label { font-size: 0.82rem; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+.terms-label a { color: var(--crimson-glow); }
+.terms-label input { margin-top: 3px; flex-shrink: 0; accent-color: var(--crimson); }
+</style>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="loader-drop">
+    <svg viewBox="0 0 200 260" fill="none"><path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="#C0162C"/></svg>
+  </div>
+</div>
+
+<nav class="auth-nav">
+  <a href="index.html" class="auth-nav-logo">
+    <div class="logo-icon"><i class="fas fa-droplet"></i></div>
+    Redpulse Foundation
+  </a>
+  <a href="login.html" class="auth-nav-back">
+    <i class="fas fa-sign-in-alt"></i> Sign In
+  </a>
+</nav>
+
+<div class="auth-page" style="padding-top:64px;">
+
+  <!-- Visual -->
+  <div class="auth-visual">
+    <div class="auth-visual-bg"></div>
+    <div class="auth-visual-grid"></div>
+    <div id="particles-hero"></div>
+    <div class="auth-visual-content">
+      <div class="auth-logo">
+        <div class="logo-icon"><i class="fas fa-droplet"></i></div>
+        Redpulse Foundation
+      </div>
+      <div class="auth-visual-drop">
+        <svg viewBox="0 0 200 260" fill="none">
+          <defs><radialGradient id="dg2" cx="40%" cy="30%" r="70%"><stop offset="0%" stop-color="#ff4466" stop-opacity="0.95"/><stop offset="100%" stop-color="#8b0000"/></radialGradient></defs>
+          <path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="url(#dg2)"/>
+          <ellipse cx="75" cy="120" rx="18" ry="28" fill="rgba(255,255,255,0.12)" transform="rotate(-20 75 120)"/>
+        </svg>
+      </div>
+      <h2 class="auth-visual-tagline">Become a<br/><span>Blood Hero</span></h2>
+      <p class="auth-visual-sub">Your single donation can save up to 3 lives. Join our verified donor network and make a real difference.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:1.5rem;text-align:left;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;background:var(--crimson-soft);border:1px solid var(--border-red);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-shield-heart" style="color:var(--crimson-glow);font-size:0.8rem;"></i></div>
+          <span style="font-size:0.875rem;color:var(--muted);">100% free & voluntary — no fees ever</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;background:var(--crimson-soft);border:1px solid var(--border-red);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-lock" style="color:var(--crimson-glow);font-size:0.8rem;"></i></div>
+          <span style="font-size:0.875rem;color:var(--muted);">Your contact info is protected from public view</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;background:var(--crimson-soft);border:1px solid var(--border-red);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-bell" style="color:var(--crimson-glow);font-size:0.8rem;"></i></div>
+          <span style="font-size:0.875rem;color:var(--muted);">Moderators contact you only when needed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Register Form -->
+  <div class="auth-form-panel">
+    <div class="auth-form-wrap" style="max-width:520px;">
+      <div class="auth-form-header">
+        <div class="auth-eyebrow">Donor Registration</div>
+        <h1 class="auth-title">Create Your Account</h1>
+        <p class="auth-subtitle">Join 12,400+ donors across Dhaka</p>
+      </div>
+
+      <!-- DRF: POST /api/auth/register/ -->
+      <form id="register-form" class="auth-form" autocomplete="off">
+
+        <!-- Personal Info -->
+        <div class="form-section-header">
+          <i class="fas fa-user"></i><span>Personal Information</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-fullname">Full Name *</label>
+          <div class="input-wrap">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="reg-fullname" name="full_name" placeholder="Your full name" required/>
+          </div>
+        </div>
+
+        <div class="row g-2 mb-0">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="reg-phone">Phone *</label>
+              <div class="input-wrap">
+                <i class="fas fa-phone input-icon"></i>
+                <input type="tel" id="reg-phone" name="phone" placeholder="01XXXXXXXXX" required/>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="reg-email">Email</label>
+              <div class="input-wrap">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="reg-email" name="email" placeholder="you@email.com"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-2 mb-0">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="reg-gender">Gender *</label>
+              <div class="input-wrap">
+                <i class="fas fa-venus-mars input-icon"></i>
+                <select id="reg-gender" name="gender" required>
+                  <option value="" disabled selected>Select</option>
+                  <option>Male</option><option>Female</option><option>Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="reg-dob">Date of Birth *</label>
+              <div class="input-wrap">
+                <i class="fas fa-calendar input-icon"></i>
+                <input type="date" id="reg-dob" name="dob" required/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blood Group -->
+        <div class="form-section-header">
+          <i class="fas fa-droplet"></i><span>Blood Information</span>
+        </div>
+
+        <div class="form-group">
+          <label>Blood Group *</label>
+          <div class="blood-group-grid" id="reg-blood-grid">
+            <div class="blood-chip" data-group="A+">A+</div>
+            <div class="blood-chip" data-group="A−">A−</div>
+            <div class="blood-chip" data-group="B+">B+</div>
+            <div class="blood-chip" data-group="B−">B−</div>
+            <div class="blood-chip" data-group="O+">O+</div>
+            <div class="blood-chip" data-group="O−">O−</div>
+            <div class="blood-chip" data-group="AB+">AB+</div>
+            <div class="blood-chip" data-group="AB−">AB−</div>
+          </div>
+          <input type="hidden" name="blood_group" id="reg-blood-group"/>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-last-donation">Last Donation Date</label>
+          <div class="input-wrap">
+            <i class="fas fa-calendar-check input-icon"></i>
+            <input type="date" id="reg-last-donation" name="last_donation"/>
+          </div>
+          <span style="font-size:0.75rem;color:var(--muted);margin-top:4px;">Leave blank if you've never donated.</span>
+        </div>
+
+        <!-- Location & University -->
+        <div class="form-section-header">
+          <i class="fas fa-map-marker-alt"></i><span>Location & Institution</span>
+        </div>
+
+        <div class="row g-2 mb-0">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="reg-district">District *</label>
+              <div class="input-wrap">
+                <i class="fas fa-map input-icon"></i>
+                <select id="reg-district" name="district" required>
+                  <option value="" disabled selected>District</option>
+                  <option>Dhaka</option><option>Gazipur</option><option>Narayanganj</option>
+                  <option>Manikganj</option><option>Munshiganj</option><option>Narsingdi</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="reg-area">Area / Thana *</label>
+              <div class="input-wrap">
+                <i class="fas fa-location-dot input-icon"></i>
+                <input type="text" id="reg-area" name="area" placeholder="e.g. Mirpur, Dhanmondi" required/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-university">University / Institution</label>
+          <div class="input-wrap">
+            <i class="fas fa-graduation-cap input-icon"></i>
+            <select id="reg-university" name="university">
+              <option value="" disabled selected>Select university (optional)</option>
+              <option>BRACU (BRAC University)</option>
+              <option>UIU (United International University)</option>
+              <option>EWU (East West University)</option>
+              <option>NSU (North South University)</option>
+              <option>AIUB</option>
+              <option>DIU (Daffodil International University)</option>
+              <option>BUET</option>
+              <option>Dhaka University</option>
+              <option>RUET</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Photo Upload -->
+        <div class="form-section-header">
+          <i class="fas fa-camera"></i><span>Profile Photo</span>
+        </div>
+
+        <div class="form-group">
+          <div class="photo-upload-area" id="upload-area">
+            <img id="photo-preview" class="photo-preview" src="" alt="Preview"/>
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>Click to upload or drag &amp; drop</span>
+            <span style="font-size:0.72rem;margin-top:4px;">JPG, PNG · Max 5MB</span>
+          </div>
+          <input type="file" id="photo-input" name="photo" accept="image/*" style="display:none;"/>
+        </div>
+
+        <!-- Security -->
+        <div class="form-section-header">
+          <i class="fas fa-lock"></i><span>Password</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Password *</label>
+          <div class="input-wrap">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="reg-password" name="password" placeholder="At least 8 characters" required/>
+            <button type="button" class="pass-toggle"><i class="fas fa-eye"></i></button>
+          </div>
+          <div class="pass-strength-wrap">
+            <div class="pass-strength-track"><div id="pass-strength"></div></div>
+            <span id="pass-strength-label"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-confirm-password">Confirm Password *</label>
+          <div class="input-wrap">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="reg-confirm-password" name="confirm_password" placeholder="Re-enter password" required/>
+            <button type="button" class="pass-toggle"><i class="fas fa-eye"></i></button>
+          </div>
+          <span class="field-error">Passwords do not match.</span>
+        </div>
+
+        <!-- <div class="form-group mb-3">
+          <label class="terms-label">
+            <input type="checkbox" name="agreed_terms" required/>
+            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I consent to being contacted by moderators only in case of blood emergencies.
+          </label>
+        </div> -->
+
+        <button type="submit" class="btn-auth" id="register-submit-btn">
+          <i class="fas fa-user-plus"></i><span>Create Account</span>
+        </button>
+
+        <p class="auth-switch mt-2">
+          Already have an account? <a href="login.html">Sign In</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>
+// Wire blood chips for register page
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('reg-blood-grid');
+  if (grid) {
+    grid.querySelectorAll('.blood-chip').forEach(chip => {
+      chip.addEventListener('click', function() {
+        grid.querySelectorAll('.blood-chip').forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('reg-blood-group').value = this.dataset.group;
+      });
+    });
+  }
+});
+</script>
+</body>
+</html>

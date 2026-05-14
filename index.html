@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+<link rel="stylesheet" href="assets/css/animation.css" />
 </head>
 <body>
 
@@ -31,25 +32,27 @@
      ============================================================ -->
 <nav id="navbar">
   <div class="container d-flex align-items-center justify-content-between">
-    <a href="#home" class="nav-brand">
+    <a href="index.html" class="nav-brand">
       <div class="pulse-icon"><i class="fas fa-droplet" style="color:#fff"></i></div>
       Redpulse Foundation
     </a>
 
     <ul class="nav-links">
-      <li><a href="#home" class="active">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#donor">Become Donor</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
+      <!-- <li><a href="#about">About</a></li> -->
+      <li><a href="donor-list.html">Donors</a></li>
       <li><a href="#request">Request Blood</a></li>
-      <li><a href="#cardgen">Donor Card</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <!-- <li><a href="#contact">Contact</a></li> -->
+      <li><a href="events.html">Events</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
     </ul>
 
     <div class="d-flex align-items-center gap-3">
-      <a href="#donor" class="btn-red d-none d-lg-inline-flex">
-        <i class="fas fa-heart"></i><span>Donate Now</span>
+      <a href="login.html" class="btn-ghost d-none d-lg-inline-flex">
+        <i class="fas fa-sign-in-alt"></i><span>Login</span>
+      </a>
+      <a href="register.html" class="btn-red d-none d-lg-inline-flex">
+        <i class="fas fa-heart"></i><span>Become Donor</span>
       </a>
       <div class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
@@ -59,15 +62,18 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="index.html" onclick="closeMenu()">Home</a>
   <a href="#about" onclick="closeMenu()">About</a>
-  <a href="#donor" onclick="closeMenu()">Become a Donor</a>
+  <a href="donor-list.html" onclick="closeMenu()">Find a Donor</a>
   <a href="#request" onclick="closeMenu()">Request Blood</a>
-  <a href="#cardgen" onclick="closeMenu()">Donor Card Generator</a>
-  <a href="#events" onclick="closeMenu()">Events</a>
-  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="events.html" onclick="closeMenu()">Events</a>
+  <a href="gallery.html" onclick="closeMenu()">Gallery</a>
+  <a href="card-generator.html" onclick="closeMenu()">Donor Card</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
-  <a href="#donor" class="btn-red mt-2" style="justify-content:center" onclick="closeMenu()"><i class="fas fa-heart"></i><span>Donate Now</span></a>
+  <div style="display:flex;gap:10px;margin-top:12px;">
+    <a href="login.html" class="btn-ghost" style="flex:1;justify-content:center;" onclick="closeMenu()"><i class="fas fa-sign-in-alt"></i><span>Login</span></a>
+    <a href="register.html" class="btn-red" style="flex:1;justify-content:center;" onclick="closeMenu()"><i class="fas fa-heart"></i><span>Register</span></a>
+  </div>
 </div>
 
 <!-- ============================================================
@@ -109,7 +115,7 @@
           </p>
 
           <div class="hero-cta">
-            <a href="#donor" class="btn-red">
+            <a href="register.html" class="btn-red">
               <i class="fas fa-heart"></i><span>Become a Donor</span>
             </a>
             <a href="#request" class="btn-ghost">
@@ -252,20 +258,20 @@
 <!-- ============================================================
      BECOME A DONOR
      ============================================================ -->
-<section id="donor" class="section-wrap">
+<!-- <section id="donor" class="section-wrap">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-lg-6 text-center reveal">
         <div class="section-label mb-2">Become a Donor</div>
         <h2 class="section-title mb-3">Register as a Blood Hero</h2>
         <p class="text-muted">Complete the form below to join our verified donor network. Your information is secure and only shared in life-saving situations.</p>
+        <a href="register.html" class="btn-red mt-3 d-inline-flex" style="margin-top:16px;"><i class="fas fa-user-plus"></i><span>Go to Full Registration Page</span></a>
       </div>
     </div>
 
     <div class="row justify-content-center">
       <div class="col-lg-8 reveal">
         <div class="glass form-card">
-          <!-- DRF NOTE: POST /api/donors/ -->
           <form id="donor-form" data-api-endpoint="/api/donors/" method="POST">
             <div class="form-row">
               <div class="form-field">
@@ -351,7 +357,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ============================================================
      REQUEST BLOOD
@@ -403,7 +409,7 @@
       <div class="col-lg-7 reveal" style="transition-delay:0.15s">
         <div class="glass form-card">
           <!-- DRF NOTE: POST /api/blood-requests/ -->
-          <form id="request-form" data-api-endpoint="/api/blood-requests/" method="POST">
+          <form id="request-form" data-api-endpoint="/requests/submit/" method="POST">
             <div class="urgency-tabs">
               <button type="button" class="urgency-tab active-tab" data-urgency="critical">🔴 Critical</button>
               <button type="button" class="urgency-tab" data-urgency="urgent">🟠 Urgent</button>
@@ -482,7 +488,7 @@
 <!-- ============================================================
      DONOR CARD GENERATOR
      ============================================================ -->
-<section id="cardgen" class="section-wrap">
+<!-- <section id="cardgen" class="section-wrap">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-lg-6 text-center reveal">
@@ -493,7 +499,6 @@
     </div>
 
     <div class="generator-layout reveal">
-      <!-- Controls -->
       <div>
         <div class="glass form-card">
           <div class="form-field">
@@ -541,7 +546,6 @@
         </div>
       </div>
 
-      <!-- Preview -->
       <div>
         <div id="donor-card-preview">
           <div class="card-preview-inner" id="card-inner">
@@ -577,7 +581,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ============================================================
      BLOOD COMPATIBILITY WIDGET
@@ -647,7 +651,7 @@
       </div>
       <div class="col-auto reveal">
         <!-- DRF NOTE: GET /api/events/ -->
-        <a href="#" class="btn-ghost"><span>View All Events</span><i class="fas fa-arrow-right ms-2"></i></a>
+        <a href="events.html" class="btn-ghost"><span>View All Events</span><i class="fas fa-arrow-right ms-2"></i></a>
       </div>
     </div>
 
@@ -733,6 +737,7 @@
         <div class="section-label mb-2">Our Gallery</div>
         <h2 class="section-title mb-3">Moments That Matter</h2>
         <p class="text-muted">A glimpse into the lives we've touched and the heroes who made it possible.</p>
+        <a href="gallery.html" class="btn-ghost mt-3 d-inline-flex" style="margin-top:16px;"><span>View Full Gallery</span><i class="fas fa-arrow-right ms-2"></i></a>
       </div>
     </div>
 
@@ -936,22 +941,22 @@
       <div class="col-6 col-lg-2">
         <div class="footer-heading">Navigation</div>
         <ul class="footer-links">
-          <li><a href="#home">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="#about">About Us</a></li>
-          <li><a href="#donor">Become Donor</a></li>
+          <li><a href="register.html">Become Donor</a></li>
           <li><a href="#request">Request Blood</a></li>
-          <li><a href="#cardgen">Donor Card</a></li>
+          <li><a href="card-generator.html">Donor Card</a></li>
         </ul>
       </div>
 
       <div class="col-6 col-lg-2">
         <div class="footer-heading">Programs</div>
         <ul class="footer-links">
-          <li><a href="#events">Events</a></li>
-          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="donor-list.html">Find a Donor</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#">Volunteer</a></li>
-          <li><a href="#">Partner With Us</a></li>
+          <li><a href="login.html">Login / Dashboard</a></li>
         </ul>
       </div>
 
@@ -991,7 +996,6 @@
      JAVASCRIPT
      ============================================================ -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="script.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

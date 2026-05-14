@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Donor Card Generator — Redpulse Foundation</title>
+<meta name="description" content="Generate your premium shareable blood donor card for social media. Download and share to inspire others."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="assets/css/style.css"/>
+<link rel="stylesheet" href="assets/css/animation.css"/>
+<link rel="stylesheet" href="assets/css/responsive.css"/>
+<style>
+.cg-hero{background:var(--ink-mid);padding:120px 0 60px;position:relative;overflow:hidden;}
+.cg-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(192,22,44,.18) 0%,transparent 60%);}
+.cg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse 80% 80% at center,black,transparent);}
+
+.generator-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+@media(max-width:900px){.generator-wrap{grid-template-columns:1fr;}}
+
+/* Controls */
+.control-panel{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:20px;padding:32px;}
+.form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+.form-field label{font-size:.78rem;font-weight:600;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;}
+.form-field input,.form-field textarea,.form-field select{background:var(--ink-light);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--snow);font-family:var(--font-body);font-size:.9rem;outline:none;transition:border-color .25s,box-shadow .25s;width:100%;}
+.form-field input:focus,.form-field textarea:focus{border-color:var(--crimson);box-shadow:0 0 0 3px rgba(192,22,44,.12);}
+.form-field textarea{resize:vertical;min-height:80px;}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,.2);}
+
+.blood-group-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.blood-chip{padding:10px 6px;border:1.5px solid var(--border);border-radius:8px;text-align:center;font-weight:700;font-size:.9rem;cursor:pointer;transition:var(--transition);color:var(--muted);background:var(--ink-light);font-family:'Space Mono',monospace;user-select:none;}
+.blood-chip:hover{border-color:var(--crimson);color:var(--crimson-glow);}
+.blood-chip.selected{background:var(--crimson);border-color:var(--crimson);color:#fff;box-shadow:0 4px 20px rgba(192,22,44,.4);}
+
+.template-selector{display:flex;gap:10px;flex-wrap:wrap;}
+.template-dot{width:36px;height:36px;border-radius:50%;cursor:pointer;transition:transform .2s,box-shadow .2s;border:3px solid transparent;}
+.template-dot.active{border-color:var(--snow);box-shadow:0 0 0 3px rgba(255,255,255,.2);}
+.template-dot:hover{transform:scale(1.1);}
+
+/* Card Preview */
+.card-preview-wrap{position:sticky;top:100px;}
+#donor-card-preview{width:100%;max-width:420px;margin:0 auto;aspect-ratio:4/5;border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(192,22,44,.2);}
+.card-preview-inner{width:100%;height:100%;background:linear-gradient(145deg,#1a0005 0%,#3d0010 40%,#8b0000 100%);padding:36px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+.card-preview-inner::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.04);}
+.card-preview-inner::after{content:'';position:absolute;bottom:-40px;left:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03);}
+
+.card-org{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.45);text-transform:uppercase;position:relative;}
+.card-blood-display{text-align:center;position:relative;}
+.card-drop-icon{font-size:2.5rem;color:rgba(255,255,255,.15);margin-bottom:8px;}
+.card-blood-group{font-family:'Space Mono',monospace;font-size:5rem;font-weight:700;color:#fff;line-height:1;text-shadow:0 0 40px rgba(255,100,100,.5);}
+.card-photo-circle{width:80px;height:80px;border-radius:50%;border:3px solid rgba(255,255,255,.3);margin:0 auto 8px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.card-photo-circle img{width:100%;height:100%;object-fit:cover;}
+.card-donor-name{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;text-align:center;line-height:1.2;position:relative;}
+.card-message{font-size:.75rem;color:rgba(255,255,255,.55);text-align:center;line-height:1.6;margin-top:8px;position:relative;}
+.card-footer-bar{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);padding-top:12px;position:relative;}
+.card-heart-row{display:flex;gap:4px;}
+.card-heart-row i{font-size:.7rem;color:rgba(255,255,255,.4);}
+.card-footer-bar span{font-size:.6rem;letter-spacing:.1em;color:rgba(255,255,255,.35);text-transform:uppercase;font-family:'Space Mono',monospace;}
+
+/* Photo Upload */
+.photo-upload-mini{border:2px dashed var(--border);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:.3s;background:var(--ink-light);}
+.photo-upload-mini:hover{border-color:var(--crimson);background:rgba(192,22,44,.06);}
+.photo-upload-mini i{color:var(--crimson-glow);font-size:1.5rem;display:block;margin-bottom:6px;}
+.photo-upload-mini span{font-size:.78rem;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-drop"><svg viewBox="0 0 200 260" fill="none"><path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="#C0162C"/></svg></div></div>
+
+<nav id="navbar">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a href="index.html" class="nav-brand"><div class="pulse-icon"><i class="fas fa-droplet" style="color:#fff"></i></div>Redpulse Foundation</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="donor-list.html">Donors</a></li>
+      <li><a href="index.html#request">Request Blood</a></li><li><a href="events.html">Events</a></li>
+      <li><a href="card-generator.html" class="active">Donor Card</a></li>
+    </ul>
+    <div class="d-flex align-items-center gap-3">
+      <a href="register.html" class="btn-red d-none d-lg-inline-flex"><i class="fas fa-heart"></i><span>Become Donor</span></a>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()">Home</a><a href="donor-list.html" onclick="closeMenu()">Donors</a>
+  <a href="index.html#request" onclick="closeMenu()">Request Blood</a><a href="events.html" onclick="closeMenu()">Events</a>
+  <a href="register.html" class="btn-red mt-2" style="justify-content:center" onclick="closeMenu()"><i class="fas fa-heart"></i><span>Become Donor</span></a>
+</div>
+
+<!-- Hero -->
+<section class="cg-hero">
+  <div class="cg-grid"></div>
+  <div class="container position-relative text-center reveal">
+    <div class="section-label mb-2">Social Sharing</div>
+    <h1 class="section-title mb-3">Donor Card Generator</h1>
+    <p class="text-muted" style="max-width:480px;margin:0 auto;">Create a stunning, shareable donor card to inspire your friends and family to join the blood donation movement.</p>
+  </div>
+</section>
+
+<!-- Generator -->
+<section class="section-wrap" style="padding-top:48px;">
+  <div class="container">
+    <div class="generator-wrap">
+
+      <!-- Controls -->
+      <div>
+        <div class="control-panel reveal">
+          <div class="form-field">
+            <label>Your Name</label>
+            <input type="text" id="card-name" placeholder="Sabbir Ahmed"/>
+          </div>
+
+          <div class="form-field">
+            <label>Blood Group</label>
+            <div class="blood-group-grid" id="card-blood-grid">
+              <div class="blood-chip" data-group="A+">A+</div>
+              <div class="blood-chip" data-group="A−">A−</div>
+              <div class="blood-chip selected" data-group="B+">B+</div>
+              <div class="blood-chip" data-group="B−">B−</div>
+              <div class="blood-chip" data-group="O+">O+</div>
+              <div class="blood-chip" data-group="O−">O−</div>
+              <div class="blood-chip" data-group="AB+">AB+</div>
+              <div class="blood-chip" data-group="AB−">AB−</div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Profile Photo (Optional)</label>
+            <div class="photo-upload-mini" id="upload-area-cg">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span>Click to upload photo</span>
+            </div>
+            <input type="file" id="card-photo-input" accept="image/*" style="display:none;"/>
+          </div>
+
+          <div class="form-field">
+            <label>Custom Message</label>
+            <textarea id="card-message" rows="3" placeholder="I donate blood because every life matters. Join me!">I donate blood because every life matters. Join me!</textarea>
+          </div>
+
+          <div class="form-field">
+            <label>Card Theme</label>
+            <div class="template-selector">
+              <div class="template-dot active" data-theme="crimson" style="background:linear-gradient(135deg,#C0162C,#8b0000);" title="Crimson"></div>
+              <div class="template-dot" data-theme="midnight" style="background:linear-gradient(135deg,#1a1a2e,#16213e);" title="Midnight"></div>
+              <div class="template-dot" data-theme="maroon" style="background:linear-gradient(135deg,#4a0010,#800020);" title="Maroon"></div>
+              <div class="template-dot" data-theme="rose" style="background:linear-gradient(135deg,#6b1530,#c2185b);" title="Rose"></div>
+              <div class="template-dot" data-theme="forest" style="background:linear-gradient(135deg,#004d00,#1a5c1a);" title="Forest"></div>
+              <div class="template-dot" data-theme="ocean" style="background:linear-gradient(135deg,#00264d,#003d7a);" title="Ocean"></div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3 flex-wrap mt-2">
+            <button class="btn-red" id="download-btn" onclick="downloadCard()">
+              <i class="fas fa-download"></i><span>Download Card</span>
+            </button>
+            <button class="btn-ghost" onclick="shareCard()">
+              <i class="fas fa-share-nodes"></i><span>Share</span>
+            </button>
+          </div>
+
+          <p style="font-size:.75rem;color:var(--muted);margin-top:14px;"><i class="fas fa-info-circle" style="color:var(--crimson-glow);margin-right:5px;"></i>Share on Facebook, Instagram, or WhatsApp to inspire others to donate blood.</p>
+        </div>
+      </div>
+
+      <!-- Preview -->
+      <div class="card-preview-wrap reveal">
+        <div style="text-align:center;margin-bottom:12px;">
+          <span class="section-label">Card Preview</span>
+        </div>
+        <div id="donor-card-preview">
+          <div class="card-preview-inner" id="card-inner">
+            <div class="card-org">REDPULSE FOUNDATION · DHAKA, BANGLADESH</div>
+
+            <div class="card-blood-display">
+              <div class="card-photo-circle" id="preview-photo-wrap">
+                <i class="fas fa-user" style="font-size:2rem;color:rgba(255,255,255,.3);"></i>
+              </div>
+              <div class="card-drop-icon"><i class="fas fa-droplet"></i></div>
+              <div class="card-blood-group" id="preview-blood-group">B+</div>
+              <div style="font-size:.7rem;color:rgba(255,255,255,.35);font-family:'Space Mono',monospace;letter-spacing:.15em;text-transform:uppercase;margin-top:6px;">Blood Group</div>
+            </div>
+
+            <div>
+              <div class="card-donor-name" id="preview-name">Your Name</div>
+              <div class="card-message" id="preview-message">I donate blood because every life matters. Join me!</div>
+            </div>
+
+            <div class="card-footer-bar">
+              <div class="card-heart-row">
+                <i class="fas fa-heart"></i><i class="fas fa-heart"></i><i class="fas fa-heart"></i>
+              </div>
+              <span>redpulsefoundation.org</span>
+              <span>PROUD DONOR</span>
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:12px;">Dimensions: 1080×1350px · Instagram/Facebook ready</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/donor-card.js"></script>
+<script>
+const CARD_THEMES_EXT = {
+  crimson:  'linear-gradient(145deg,#1a0005 0%,#3d0010 40%,#8b0000 100%)',
+  midnight: 'linear-gradient(145deg,#0a0a1a 0%,#141430 40%,#1a1a3e 100%)',
+  maroon:   'linear-gradient(145deg,#1a0008 0%,#4a0015 40%,#800020 100%)',
+  rose:     'linear-gradient(145deg,#1a0010 0%,#6b1530 40%,#c2185b 100%)',
+  forest:   'linear-gradient(145deg,#001a00 0%,#004d00 40%,#1a5c1a 100%)',
+  ocean:    'linear-gradient(145deg,#00101a 0%,#00264d 40%,#003d7a 100%)'
+};
+let cardTheme = 'crimson';
+let cardBG    = 'B+';
+
+function updateCard() {
+  const name = document.getElementById('card-name')?.value || '';
+  const msg  = document.getElementById('card-message')?.value || '';
+  const pn   = document.getElementById('preview-name');
+  const pm   = document.getElementById('preview-message');
+  const pbg  = document.getElementById('preview-blood-group');
+  const ci   = document.getElementById('card-inner');
+  if (pn)  pn.textContent  = name || 'Your Name';
+  if (pm)  pm.textContent  = msg;
+  if (pbg) pbg.textContent = cardBG;
+  if (ci)  ci.style.background = CARD_THEMES_EXT[cardTheme];
+}
+
+// Blood chips
+document.querySelectorAll('#card-blood-grid .blood-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('#card-blood-grid .blood-chip').forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
+    cardBG = this.dataset.group;
+    updateCard();
+  });
+});
+
+// Theme dots
+document.querySelectorAll('.template-dot').forEach(dot => {
+  dot.addEventListener('click', function() {
+    document.querySelectorAll('.template-dot').forEach(d => d.classList.remove('active'));
+    this.classList.add('active');
+    cardTheme = this.dataset.theme;
+    updateCard();
+  });
+});
+
+// Inputs
+['card-name','card-message'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', updateCard);
+});
+
+// Photo upload
+const photoInput = document.getElementById('card-photo-input');
+const uploadAreaCG = document.getElementById('upload-area-cg');
+if (uploadAreaCG && photoInput) {
+  uploadAreaCG.addEventListener('click', () => photoInput.click());
+  photoInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const wrap = document.getElementById('preview-photo-wrap');
+      if (wrap) {
+        wrap.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;" alt="Donor"/>`;
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Download
+async function downloadCard() {
+  const card = document.getElementById('donor-card-preview');
+  const btn  = document.getElementById('download-btn');
+  if (!card || !btn) return;
+  btn.disabled  = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Generating…</span>';
+  try {
+    if (typeof html2canvas === 'undefined') {
+      await new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+    }
+    const canvas = await html2canvas(card, { backgroundColor: null, scale: 3, useCORS: true, logging: false });
+    const name   = (document.getElementById('card-name')?.value || 'donor').replace(/\s+/g,'_');
+    const link   = document.createElement('a');
+    link.download = `redpulse_${name}.png`;
+    link.href     = canvas.toDataURL('image/png');
+    link.click();
+    showToast('Card downloaded successfully!', 'success');
+  } catch (err) {
+    showToast('Download failed. Please try again.', 'error');
+  } finally {
+    btn.disabled  = false;
+    btn.innerHTML = '<i class="fas fa-download"></i><span>Download Card</span>';
+  }
+}
+async function shareCard() {
+  if (navigator.share) {
+    try { await navigator.share({ title: 'I am a proud blood donor!', url: window.location.origin }); } catch(_) {}
+  } else {
+    navigator.clipboard?.writeText(window.location.origin);
+    showToast('Link copied!', 'info');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', updateCard);
+</script>
+</body>
+</html>

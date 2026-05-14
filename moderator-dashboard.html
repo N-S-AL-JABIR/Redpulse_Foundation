@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Moderator Dashboard — Redpulse Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="assets/css/dashboard.css"/>
+<link rel="stylesheet" href="assets/css/animation.css"/>
+<style>
+.urgency-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;white-space:nowrap;}
+.up-critical{background:rgba(192,22,44,.2);color:#ff6b7a;border:1px solid rgba(192,22,44,.35);}
+.up-urgent  {background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.3);}
+.up-routine {background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.3);}
+.blink-alert{animation:blink 1.2s infinite;}
+</style>
+</head>
+<body id="mod-dash">
+
+<div id="page-loader"><div class="loader-drop"><svg viewBox="0 0 200 260" fill="none"><path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="#C0162C"/></svg></div></div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<div class="dash-layout">
+  <!-- Sidebar -->
+  <aside class="dash-sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fas fa-droplet"></i></div><span>Redpulse</span>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" style="border-color:#f59e0b;color:#fbbf24;"><i class="fas fa-shield-halved"></i></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">Admin Moderator</div>
+        <div class="sidebar-user-role" style="color:#f59e0b;">Moderator</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Control Panel</div>
+      <a href="moderator-dashboard.html" class="sidebar-nav-item active"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+      <a href="#requests" class="sidebar-nav-item"><i class="fas fa-hand-holding-medical"></i>Blood Requests<span class="nav-badge" id="pending-badge">5</span></a>
+      <a href="#donors" class="sidebar-nav-item"><i class="fas fa-users"></i>Donor Management</a>
+      <a href="#emergency" class="sidebar-nav-item"><i class="fas fa-triangle-exclamation"></i>Emergency Alerts<span class="nav-badge" style="background:#f59e0b;" id="emergency-badge">2</span></a>
+      <div class="nav-section-title">Analytics</div>
+      <a href="#analytics" class="sidebar-nav-item"><i class="fas fa-chart-line"></i>Analytics</a>
+      <a href="#volunteers" class="sidebar-nav-item"><i class="fas fa-people-group"></i>Volunteers</a>
+      <a href="#events" class="sidebar-nav-item"><i class="fas fa-calendar-alt"></i>Events</a>
+      <div class="nav-section-title">System</div>
+      <a href="index.html" class="sidebar-nav-item"><i class="fas fa-globe"></i>Public Site</a>
+      <a href="login.html" class="sidebar-nav-item"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <button class="menu-toggle" id="menu-toggle-btn"><i class="fas fa-bars"></i></button>
+      <div>
+        <div class="topbar-title">Moderator Control Panel</div>
+        <div class="topbar-subtitle">Redpulse Foundation · West Dhaka Region</div>
+      </div>
+      <div class="topbar-actions">
+        <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(192,22,44,.12);border:1px solid rgba(192,22,44,.3);border-radius:8px;font-size:.78rem;color:var(--crimson-glow);">
+          <span class="blink-alert" style="width:7px;height:7px;background:var(--crimson);border-radius:50%;display:inline-block;"></span>
+          <strong id="emergency-count">2</strong> Emergency
+        </div>
+        <div class="topbar-icon-btn" id="notif-btn"><i class="fas fa-bell"></i><span class="notif-dot"></span></div>
+      </div>
+    </header>
+
+    <main class="dash-content">
+
+      <!-- Emergency Alert -->
+      <div class="dash-alert critical mb-4 reveal">
+        <i class="fas fa-triangle-exclamation dash-alert-icon blink-alert"></i>
+        <div>
+          <strong>2 Critical Blood Requests Pending Immediate Action</strong><br/>
+          <span style="font-size:.82rem;">O− needed at DMCH · AB− needed at Square Hospital — Contact donors immediately.</span>
+        </div>
+        <a href="#requests" class="btn-sm btn-sm-red" style="margin-left:auto;white-space:nowrap;"><i class="fas fa-arrow-right"></i>View All</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-grid reveal">
+        <div class="stat-card">
+          <div class="stat-icon red"><i class="fas fa-clock"></i></div>
+          <div class="stat-info"><div class="stat-value" id="pending-count">5</div><div class="stat-label">Pending Requests</div><div class="stat-change down"><i class="fas fa-arrow-up"></i>+2 since yesterday</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-users"></i></div>
+          <div class="stat-info"><div class="stat-value" id="active-donors">284</div><div class="stat-label">Active Donors</div><div class="stat-change up"><i class="fas fa-arrow-up"></i>+12 this week</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow"><i class="fas fa-triangle-exclamation"></i></div>
+          <div class="stat-info"><div class="stat-value" id="emergency-stat">2</div><div class="stat-label">Emergency Alerts</div><div class="stat-change down"><i class="fas fa-arrow-up"></i>Needs immediate action</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fas fa-calendar-day"></i></div>
+          <div class="stat-info"><div class="stat-value" id="today-requests">12</div><div class="stat-label">Today's Requests</div><div class="stat-change up"><i class="fas fa-arrow-up"></i>+3 from yesterday</div></div>
+        </div>
+      </div>
+
+      <!-- Blood Requests Table -->
+      <div class="dash-panel mb-4 reveal" id="requests">
+        <div class="dash-panel-header">
+          <div class="dash-panel-title"><i class="fas fa-list"></i>Incoming Blood Requests</div>
+          <div class="d-flex gap-2">
+            <select class="dash-input" style="width:auto;padding:6px 12px;font-size:.8rem;" onchange="filterByUrgency(this.value)">
+              <option value="">All Urgency</option>
+              <option value="critical">Critical</option>
+              <option value="urgent">Urgent</option>
+              <option value="routine">Routine</option>
+            </select>
+            <select class="dash-input" style="width:auto;padding:6px 12px;font-size:.8rem;">
+              <option>All Blood Groups</option>
+              <option>O+</option><option>O−</option><option>A+</option><option>A−</option>
+              <option>B+</option><option>B−</option><option>AB+</option><option>AB−</option>
+            </select>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="dash-table">
+            <thead>
+              <tr><th>#ID</th><th>Patient</th><th>Blood</th><th>Hospital</th><th>Urgency</th><th>Status</th><th>Time</th><th>Action</th></tr>
+            </thead>
+            <tbody id="requests-tbody">
+              <tr>
+                <td style="font-family:'Space Mono',monospace;font-size:.78rem;">#0001</td>
+                <td>Fatima Begum</td>
+                <td><span class="badge badge-red" style="font-weight:700;">O−</span></td>
+                <td>DMCH, Shahbag</td>
+                <td><span class="urgency-pill up-critical">🔴 Critical</span></td>
+                <td><span class="badge badge-yellow">Pending</span></td>
+                <td style="font-size:.75rem;color:var(--muted);">10 min ago</td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn-sm btn-sm-red" onclick="assignRequest(1)" title="Assign Donor"><i class="fas fa-user-check"></i></button>
+                    <button class="btn-sm btn-sm-ghost" onclick="showToast('Viewing request #0001','info')" title="View Details"><i class="fas fa-eye"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Space Mono',monospace;font-size:.78rem;">#0002</td>
+                <td>Rahim Uddin</td>
+                <td><span class="badge badge-blue" style="font-weight:700;">AB−</span></td>
+                <td>Square Hospital</td>
+                <td><span class="urgency-pill up-critical">🔴 Critical</span></td>
+                <td><span class="badge badge-blue">Assigned</span></td>
+                <td style="font-size:.75rem;color:var(--muted);">25 min ago</td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn-sm btn-sm-red" onclick="assignRequest(2)"><i class="fas fa-user-check"></i></button>
+                    <button class="btn-sm btn-sm-ghost" onclick="showToast('Viewing request #0002','info')"><i class="fas fa-eye"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Space Mono',monospace;font-size:.78rem;">#0003</td>
+                <td>Sara Akter</td>
+                <td><span class="badge badge-green" style="font-weight:700;">B+</span></td>
+                <td>BIRDEM, Shahbag</td>
+                <td><span class="urgency-pill up-urgent">🟠 Urgent</span></td>
+                <td><span class="badge badge-yellow">Pending</span></td>
+                <td style="font-size:.75rem;color:var(--muted);">1 hr ago</td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn-sm btn-sm-red" onclick="assignRequest(3)"><i class="fas fa-user-check"></i></button>
+                    <button class="btn-sm btn-sm-ghost" onclick="showToast('Viewing request #0003','info')"><i class="fas fa-eye"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Space Mono',monospace;font-size:.78rem;">#0004</td>
+                <td>Karim Hossain</td>
+                <td><span class="badge badge-muted" style="font-weight:700;">A+</span></td>
+                <td>Ibn Sina, Dhanmondi</td>
+                <td><span class="urgency-pill up-routine">🟡 Routine</span></td>
+                <td><span class="badge badge-green">Fulfilled</span></td>
+                <td style="font-size:.75rem;color:var(--muted);">2 hrs ago</td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn-sm btn-sm-ghost" onclick="showToast('Viewing request #0004','info')"><i class="fas fa-eye"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Space Mono',monospace;font-size:.78rem;">#0005</td>
+                <td>Nasrin Islam</td>
+                <td><span class="badge badge-muted" style="font-weight:700;">O+</span></td>
+                <td>Anwer Khan Modern</td>
+                <td><span class="urgency-pill up-routine">🟡 Routine</span></td>
+                <td><span class="badge badge-yellow">Pending</span></td>
+                <td style="font-size:.75rem;color:var(--muted);">3 hrs ago</td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn-sm btn-sm-red" onclick="assignRequest(5)"><i class="fas fa-user-check"></i></button>
+                    <button class="btn-sm btn-sm-ghost" onclick="showToast('Viewing request #0005','info')"><i class="fas fa-eye"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Active Donors + Area Stats -->
+      <div class="row g-4">
+        <div class="col-lg-6" id="donors">
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <div class="dash-panel-title"><i class="fas fa-users"></i>Top Active Donors</div>
+              <a href="donor-list.html" class="btn-sm btn-sm-ghost">View All</a>
+            </div>
+            <div class="dash-panel-body" style="padding:0;">
+              <table class="dash-table">
+                <thead><tr><th>Donor</th><th>Blood</th><th>Area</th><th>Status</th><th>Last Active</th></tr></thead>
+                <tbody>
+                  <tr><td>Sabbir A.</td><td><span class="badge badge-red">O+</span></td><td>Mirpur</td><td><span class="badge badge-green">Available</span></td><td style="font-size:.75rem;color:var(--muted);">Today</td></tr>
+                  <tr><td>Nasrin I.</td><td><span class="badge badge-green">B+</span></td><td>Dhanmondi</td><td><span class="badge badge-green">Available</span></td><td style="font-size:.75rem;color:var(--muted);">Yesterday</td></tr>
+                  <tr><td>Rahim U.</td><td><span class="badge badge-muted">A−</span></td><td>Uttara</td><td><span class="badge badge-yellow">Recovery</span></td><td style="font-size:.75rem;color:var(--muted);">2 days ago</td></tr>
+                  <tr><td>Fatima B.</td><td><span class="badge badge-blue">AB+</span></td><td>Mohammadpur</td><td><span class="badge badge-green">Available</span></td><td style="font-size:.75rem;color:var(--muted);">Today</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6" id="analytics">
+          <div class="dash-panel">
+            <div class="dash-panel-header"><div class="dash-panel-title"><i class="fas fa-map-location-dot"></i>Area Coverage — West Dhaka</div></div>
+            <div class="dash-panel-body">
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div><div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--snow);margin-bottom:5px;"><span>Mirpur</span><span style="color:var(--muted);">84 donors</span></div><div class="progress-track"><div class="progress-fill" style="width:84%;"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--snow);margin-bottom:5px;"><span>Mohammadpur</span><span style="color:var(--muted);">62 donors</span></div><div class="progress-track"><div class="progress-fill" style="width:62%;"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--snow);margin-bottom:5px;"><span>Dhanmondi</span><span style="color:var(--muted);">58 donors</span></div><div class="progress-track"><div class="progress-fill" style="width:58%;"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--snow);margin-bottom:5px;"><span>Rayer Bazar</span><span style="color:var(--muted);">41 donors</span></div><div class="progress-track"><div class="progress-fill" style="width:41%;"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--snow);margin-bottom:5px;"><span>Savar</span><span style="color:var(--muted);">35 donors</span></div><div class="progress-track"><div class="progress-fill" style="width:35%;"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--snow);margin-bottom:5px;"><span>Gazipur</span><span style="color:var(--muted);">28 donors</span></div><div class="progress-track"><div class="progress-fill" style="width:28%;"></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script>
+document.getElementById('menu-toggle-btn')?.addEventListener('click', () => {
+  document.querySelector('.dash-sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('active');
+});
+function filterByUrgency(val) {
+  const rows = document.querySelectorAll('#requests-tbody tr');
+  rows.forEach(row => {
+    const pill = row.querySelector('.urgency-pill');
+    if (!val || (pill && pill.textContent.toLowerCase().includes(val))) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Events — Blood Donation Camps | Redpulse Foundation</title>
+<meta name="description" content="Upcoming blood donation camps, awareness drives, and seminars organized by Redpulse Foundation across Dhaka."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="assets/css/style.css"/>
+<link rel="stylesheet" href="assets/css/animation.css"/>
+<link rel="stylesheet" href="assets/css/responsive.css"/>
+<style>
+.events-hero{background:var(--ink-mid);padding:120px 0 60px;position:relative;overflow:hidden;}
+.events-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 90% 50%,rgba(192,22,44,.18) 0%,transparent 60%);}
+.events-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse 80% 80% at center,black,transparent);}
+
+.events-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;}
+.filter-pill{padding:7px 18px;border-radius:60px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body);}
+.filter-pill:hover{border-color:rgba(255,255,255,.2);color:var(--snow);}
+.filter-pill.active{background:var(--crimson);border-color:var(--crimson);color:#fff;}
+
+.event-card-full{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column;}
+.event-card-full:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);border-color:rgba(192,22,44,.3);}
+
+.event-card-img{height:180px;background:linear-gradient(135deg,#1a0005,#3d0010,#8b0000);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.event-card-img .event-type-badge{position:absolute;top:12px;left:12px;padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:600;}
+.event-card-img .event-date-float{position:absolute;top:12px;right:12px;background:rgba(13,13,15,.85);border:1px solid var(--border);border-radius:10px;padding:8px 12px;text-align:center;backdrop-filter:blur(10px);}
+.event-date-float .day{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--snow);line-height:1;}
+.event-date-float .mon{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
+.event-icon-big{font-size:3rem;color:rgba(192,22,44,.4);}
+
+.event-card-body{padding:20px;flex:1;display:flex;flex-direction:column;}
+.event-card-title{font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--snow);margin-bottom:8px;line-height:1.3;}
+.event-meta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.event-meta-item{display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--muted);}
+.event-meta-item i{color:var(--crimson-glow);font-size:.75rem;}
+.event-card-desc{font-size:.85rem;color:var(--muted);line-height:1.7;flex:1;margin-bottom:16px;}
+.btn-event-detail{display:flex;align-items:center;gap:8px;padding:10px 20px;background:var(--crimson);border:none;border-radius:10px;color:#fff;font-size:.875rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font-body);width:100%;justify-content:center;}
+.btn-event-detail:hover{background:var(--crimson-glow);box-shadow:0 6px 20px rgba(192,22,44,.4);}
+
+/* Event Modal */
+.event-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.3s;}
+.event-modal.open{opacity:1;visibility:visible;}
+.event-modal-box{background:var(--ink-mid);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:520px;width:90%;animation:scale-in .3s ease;}
+.event-modal-type{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--crimson-glow);margin-bottom:.5rem;}
+.event-modal-title{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--snow);margin-bottom:16px;line-height:1.2;}
+.event-modal-meta{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem;}
+.event-modal-meta-row{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);}
+.event-modal-meta-row i{color:var(--crimson-glow);width:16px;flex-shrink:0;}
+.event-modal-desc{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem;}
+</style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-drop"><svg viewBox="0 0 200 260" fill="none"><path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="#C0162C"/></svg></div></div>
+
+<nav id="navbar">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a href="index.html" class="nav-brand"><div class="pulse-icon"><i class="fas fa-droplet" style="color:#fff"></i></div>Redpulse Foundation</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="donor-list.html">Donors</a></li>
+      <li><a href="index.html#request">Request Blood</a></li><li><a href="events.html" class="active">Events</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+    <div class="d-flex align-items-center gap-3">
+      <a href="login.html" class="btn-ghost d-none d-lg-inline-flex">
+        <i class="fas fa-sign-in-alt"></i><span>Login</span>
+      </a>
+      <a href="register.html" class="btn-red d-none d-lg-inline-flex">
+        <i class="fas fa-heart"></i><span>Become Donor</span>
+      </a>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()">Home</a><a href="donor-list.html" onclick="closeMenu()">Donors</a>
+  <a href="index.html#request" onclick="closeMenu()">Request Blood</a><a href="events.html" onclick="closeMenu()">Events</a>
+  <a href="gallery.html" onclick="closeMenu()">Gallery</a>
+  <a href="register.html" class="btn-red mt-2" style="justify-content:center" onclick="closeMenu()"><i class="fas fa-heart"></i><span>Become Donor</span></a>
+</div>
+
+<!-- Hero -->
+<section class="events-hero">
+  <div class="events-grid-bg"></div>
+  <div class="container position-relative text-center reveal">
+    <div class="section-label mb-2">Blood Donation Camps &amp; Drives</div>
+    <h1 class="section-title mb-3">Upcoming Events</h1>
+    <p class="text-muted" style="max-width:500px;margin:0 auto;">Join our blood donation camps, awareness workshops, and health seminars across Dhaka and beyond.</p>
+  </div>
+</section>
+
+<!-- Events Content -->
+<section class="section-wrap" style="padding-top:48px;">
+  <div class="container">
+
+    <!-- Filters -->
+    <div class="events-filter reveal">
+      <button class="filter-pill active" data-cat="all" onclick="filterEvents(this,'all')">All Events</button>
+      <button class="filter-pill" data-cat="camp" onclick="filterEvents(this,'camp')"><i class="fas fa-droplet"></i> Blood Camps</button>
+      <button class="filter-pill" data-cat="awareness" onclick="filterEvents(this,'awareness')"><i class="fas fa-bullhorn"></i> Awareness</button>
+      <button class="filter-pill" data-cat="seminar" onclick="filterEvents(this,'seminar')"><i class="fas fa-chalkboard-teacher"></i> Seminars</button>
+    </div>
+
+    <!-- DRF: GET /api/events/ -->
+    <div class="row g-4" id="events-grid">
+      <!-- Events will be loaded dynamically here by events.js -->
+    </div>
+  </div>
+</section>
+
+<!-- Event Detail Modal -->
+<div class="event-modal" id="event-modal">
+  <div class="event-modal-box">
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <div class="event-modal-type" id="modal-event-type">Blood Camp</div>
+      <button id="event-modal-close" style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;"><i class="fas fa-times"></i></button>
+    </div>
+    <h2 class="event-modal-title" id="modal-event-title">Event Title</h2>
+    <div class="event-modal-meta">
+      <div class="event-modal-meta-row"><i class="fas fa-calendar"></i><span id="modal-event-date">Date</span></div>
+      <div class="event-modal-meta-row"><i class="fas fa-clock"></i><span id="modal-event-time">Time</span></div>
+      <div class="event-modal-meta-row"><i class="fas fa-location-dot"></i><span id="modal-event-venue">Venue</span></div>
+    </div>
+    <div class="event-modal-desc" id="modal-event-desc">Description</div>
+    <div class="d-flex gap-3 flex-wrap">
+      <button class="btn-red" style="flex:1;justify-content:center;" onclick="showToast('Registration captured — API pending.','success')"><i class="fas fa-user-plus"></i><span>Register to Attend</span></button>
+      <button class="btn-ghost" onclick="document.getElementById('event-modal').classList.remove('open');document.body.style.overflow=''"><span>Close</span></button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/animation.js"></script>
+<script src="assets/js/events.js"></script>
+</body>
+</html>

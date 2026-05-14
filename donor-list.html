@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Donor Directory — Redpulse Foundation</title>
+<meta name="description" content="Search verified blood donors across Dhaka by blood group, area, and university."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="assets/css/style.css"/>
+<link rel="stylesheet" href="assets/css/animation.css"/>
+<link rel="stylesheet" href="assets/css/responsive.css"/>
+<style>
+/* ── Donor List Page ── */
+.dl-hero{background:var(--ink-mid);padding:120px 0 60px;position:relative;overflow:hidden;}
+.dl-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(192,22,44,.18) 0%,transparent 60%);}
+.dl-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse 80% 80% at center,black,transparent);}
+.search-bar{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:60px;padding:6px 6px 6px 20px;display:flex;align-items:center;gap:12px;max-width:600px;margin:2rem auto 0;backdrop-filter:blur(12px);}
+.search-bar input{background:none;border:none;outline:none;color:var(--snow);font-family:var(--font-body);font-size:0.95rem;flex:1;}
+.search-bar input::placeholder{color:var(--muted);}
+.search-bar button{background:var(--crimson);border:none;border-radius:60px;color:#fff;padding:10px 24px;font-weight:600;font-size:0.875rem;cursor:pointer;transition:var(--transition);font-family:var(--font-body);}
+.search-bar button:hover{background:var(--crimson-glow);}
+
+.filter-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:20px 0;}
+.filter-select{background:var(--ink-light);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--snow);font-family:var(--font-body);font-size:0.875rem;outline:none;cursor:pointer;appearance:none;transition:border-color .25s;}
+.filter-select:focus{border-color:var(--crimson);}
+.filter-select option{background:var(--ink-mid);}
+.filter-count{margin-left:auto;font-size:0.82rem;color:var(--muted);}
+
+.donor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+
+.donor-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;cursor:pointer;}
+.donor-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);border-color:rgba(192,22,44,.3);}
+
+.donor-card-banner{height:80px;background:linear-gradient(135deg,#1a0005,#3d0010,#8b0000);position:relative;}
+.donor-card-banner-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 80% 50%,rgba(255,255,255,.06) 0%,transparent 50%);}
+.donor-card-avatar{width:64px;height:64px;border-radius:50%;border:3px solid var(--crimson);background:var(--ink-light);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--crimson-glow);font-weight:700;position:absolute;bottom:-32px;left:20px;overflow:hidden;object-fit:cover;}
+.donor-card-avatar img{width:100%;height:100%;object-fit:cover;}
+.donor-card-bg-badge{position:absolute;top:12px;right:12px;background:var(--crimson);color:#fff;font-family:'Space Mono',monospace;font-weight:700;font-size:1rem;padding:4px 14px;border-radius:20px;box-shadow:0 4px 16px rgba(192,22,44,.5);}
+
+.donor-card-body{padding:40px 20px 20px;}
+.donor-card-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:var(--snow);margin-bottom:4px;}
+.donor-card-meta{font-size:0.78rem;color:var(--muted);display:flex;flex-direction:column;gap:3px;margin-bottom:12px;}
+.donor-card-meta span{display:flex;align-items:center;gap:6px;}
+.donor-card-meta i{color:var(--crimson-glow);width:12px;}
+
+.eligibility-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:600;margin-bottom:12px;}
+.elig-available{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);}
+.elig-recovery{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.3);}
+.elig-unavailable{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--border);}
+
+.donor-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border);}
+.donor-card-uni{font-size:0.72rem;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.btn-contact-mod{background:var(--crimson);border:none;border-radius:8px;color:#fff;padding:7px 14px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:5px;font-family:var(--font-body);}
+.btn-contact-mod:hover{background:var(--crimson-glow);box-shadow:0 4px 16px rgba(192,22,44,.4);}
+
+/* Privacy Notice */
+.privacy-notice{background:rgba(192,22,44,.08);border:1px solid rgba(192,22,44,.2);border-radius:10px;padding:12px 16px;font-size:0.82rem;color:var(--muted);display:flex;gap:10px;align-items:flex-start;margin-bottom:1.5rem;}
+.privacy-notice i{color:var(--crimson-glow);margin-top:1px;flex-shrink:0;}
+
+/* Contact Modal */
+.contact-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.3s;}
+.contact-modal.open{opacity:1;visibility:visible;}
+.contact-modal-card{background:var(--ink-mid);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:440px;width:90%;animation:scale-in .3s ease;}
+</style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-drop"><svg viewBox="0 0 200 260" fill="none"><path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="#C0162C"/></svg></div></div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a href="index.html" class="nav-brand"><div class="pulse-icon"><i class="fas fa-droplet" style="color:#fff"></i></div>Redpulse Foundation</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="donor-list.html" class="active">Donors</a></li>
+      <li><a href="index.html#request">Request Blood</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+    <div class="d-flex align-items-center gap-3">
+      <a href="login.html" class="btn-ghost d-none d-lg-inline-flex">
+        <i class="fas fa-sign-in-alt"></i><span>Login</span>
+      </a>
+      <a href="register.html" class="btn-red d-none d-lg-inline-flex">
+        <i class="fas fa-heart"></i><span>Become Donor</span>
+      </a>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="donor-list.html" onclick="closeMenu()">Donors</a>
+  <a href="index.html#request" onclick="closeMenu()">Request Blood</a>
+  <a href="events.html" onclick="closeMenu()">Events</a>
+  <a href="gallery.html" onclick="closeMenu()">Gallery</a>
+  <a href="register.html" class="btn-red mt-2" style="justify-content:center" onclick="closeMenu()"><i class="fas fa-heart"></i><span>Become Donor</span></a>
+</div>
+
+<!-- Hero -->
+<section class="dl-hero">
+  <div class="dl-hero-grid"></div>
+  <div class="container position-relative">
+    <div class="text-center reveal">
+      <div class="section-label mb-2">Donor Directory</div>
+      <h1 class="section-title mb-3">Find a Blood Donor</h1>
+      <p class="text-muted" style="max-width:480px;margin:0 auto;">Search our verified donor network. Donor contacts are private — our moderators will connect you.</p>
+      <div class="search-bar">
+        <i class="fas fa-search" style="color:var(--muted);flex-shrink:0;"></i>
+        <input type="text" id="donor-search" placeholder="Search by name or area…" autocomplete="off"/>
+        <button type="button"><i class="fas fa-search"></i> Search</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Donor List -->
+<section class="section-wrap" style="padding-top:48px;">
+  <div class="container">
+
+    <!-- Privacy Notice -->
+    <div class="privacy-notice reveal">
+      <i class="fas fa-shield-halved"></i>
+      <div>
+        <strong style="color:var(--snow);">Donor Privacy Protected</strong><br/>
+        Phone numbers are hidden. To reach a donor, click <strong>"Contact Moderator"</strong> — our team will connect you within minutes after verification.
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar reveal">
+      <select class="filter-select" id="filter-blood-group">
+        <option value="">All Blood Groups</option>
+        <option>A+</option><option>A−</option><option>B+</option><option>B−</option>
+        <option>O+</option><option>O−</option><option>AB+</option><option>AB−</option>
+      </select>
+      <select class="filter-select" id="filter-area">
+        <option value="">All Areas</option>
+        <option>Mirpur</option><option>Dhanmondi</option><option>Mohammadpur</option>
+        <option>Gulshan</option><option>Uttara</option><option>Savar</option>
+        <option>Gazipur</option><option>Rayer Bazar</option>
+      </select>
+      <select class="filter-select" id="filter-university">
+        <option value="">All Universities</option>
+        <option>BRACU</option><option>UIU</option><option>EWU</option>
+        <option>NSU</option><option>AIUB</option><option>DIU</option><option>BUET</option>
+      </select>
+      <span class="filter-count" id="donor-count">Loading donors…</span>
+    </div>
+
+    <!-- No Result -->
+    <div id="no-donors-msg" style="display:none;text-align:center;padding:60px 0;color:var(--muted);">
+      <i class="fas fa-search fa-2x mb-3" style="color:var(--crimson);opacity:.4;display:block;"></i>
+      No donors found matching your filters.
+    </div>
+
+    <!-- Grid — DRF: GET /api/donors/search/ -->
+    <div class="donor-grid" id="donors-grid">
+      <!-- Donors will be loaded dynamically here by donor-list.js -->
+    </div>
+
+    <!-- Load More -->
+    <div class="text-center mt-5">
+      <button class="btn-ghost" id="load-more-btn" onclick="showToast('More donors loading via API…','info')">
+        <i class="fas fa-plus"></i><span>Load More Donors</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Moderator Modal -->
+<div class="contact-modal" id="contact-modal">
+  <div class="contact-modal-card">
+    <div class="d-flex justify-content-between align-items-start mb-3">
+      <div>
+        <div class="section-label mb-1">Contact Moderator</div>
+        <h3 style="color:var(--snow);font-size:1.2rem;">Request Blood Donor</h3>
+      </div>
+      <button onclick="closeContactModal()" style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;"><i class="fas fa-times"></i></button>
+    </div>
+    <div style="background:rgba(192,22,44,.1);border:1px solid rgba(192,22,44,.25);border-radius:10px;padding:12px 14px;margin-bottom:1.2rem;font-size:0.82rem;color:var(--muted);">
+      <i class="fas fa-info-circle" style="color:var(--crimson-glow);margin-right:6px;"></i>
+      Donor: <strong id="modal-donor-name" style="color:var(--snow);"></strong> &nbsp;|&nbsp; Blood: <strong id="modal-donor-bg" style="color:var(--crimson-glow);"></strong>
+    </div>
+    <form id="contact-mod-form" style="display:flex;flex-direction:column;gap:12px;" onsubmit="submitContactMod(event)">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;">Your Name *</label>
+        <input type="text" name="requester_name" placeholder="Full name" required style="background:var(--ink-light);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--snow);font-family:var(--font-body);font-size:.9rem;outline:none;"/>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;">Phone *</label>
+        <input type="tel" name="requester_phone" placeholder="01XXXXXXXXX" required style="background:var(--ink-light);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--snow);font-family:var(--font-body);font-size:.9rem;outline:none;"/>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;">Hospital *</label>
+        <input type="text" name="hospital" placeholder="Hospital name & location" required style="background:var(--ink-light);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--snow);font-family:var(--font-body);font-size:.9rem;outline:none;"/>
+      </div>
+      <button type="submit" style="background:var(--crimson);border:none;border-radius:12px;color:#fff;padding:13px;font-weight:700;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-body);margin-top:4px;">
+        <i class="fas fa-paper-plane"></i> Send Request to Moderator
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/animation.js"></script>
+<script src="assets/js/donor-list.js"></script>
+<script>
+function openContactModal(name, bg) {
+  document.getElementById('modal-donor-name').textContent = name;
+  document.getElementById('modal-donor-bg').textContent   = bg;
+  document.getElementById('contact-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeContactModal() {
+  document.getElementById('contact-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function submitContactMod(e) {
+  e.preventDefault();
+  closeContactModal();
+  showToast('Request sent to moderator! We\'ll contact you shortly.', 'success');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const grid  = document.getElementById('donors-grid');
+  const count = document.getElementById('donor-count');
+  if (grid && count) {
+    const cards = grid.querySelectorAll('.donor-card');
+    count.textContent = cards.length + ' donors found';
+  }
+  document.getElementById('contact-modal').addEventListener('click', function(e){
+    if(e.target === this) closeContactModal();
+  });
+});
+</script>
+</body>
+</html>

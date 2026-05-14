@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Donor Dashboard — Redpulse Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="assets/css/dashboard.css"/>
+<link rel="stylesheet" href="assets/css/animation.css"/>
+</head>
+<body id="donor-dash">
+
+<div id="page-loader"><div class="loader-drop"><svg viewBox="0 0 200 260" fill="none"><path d="M100 10 C100 10 20 110 20 170 C20 218 56 250 100 250 C144 250 180 218 180 170 C180 110 100 10 100 10 Z" fill="#C0162C"/></svg></div></div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<div class="dash-layout">
+
+  <!-- Sidebar -->
+  <aside class="dash-sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fas fa-droplet"></i></div>
+      <span>Redpulse</span>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-avatar"><i class="fas fa-user"></i></div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name donor-name">Sabbir Ahmed</div>
+        <div class="sidebar-user-role">Verified Donor</div>
+      </div>
+      <span class="sidebar-blood-badge donor-bg">O+</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Main</div>
+      <a href="dashboard.html" class="sidebar-nav-item active"><i class="fas fa-home"></i>Dashboard</a>
+      <a href="donor-profile.html" class="sidebar-nav-item"><i class="fas fa-user"></i>My Profile</a>
+      <a href="card-generator.html" class="sidebar-nav-item"><i class="fas fa-id-card"></i>Donor Card</a>
+      <div class="nav-section-title">Activity</div>
+      <a href="#history" class="sidebar-nav-item"><i class="fas fa-history"></i>Donation History</a>
+      <a href="#notifications" class="sidebar-nav-item"><i class="fas fa-bell"></i>Notifications<span class="nav-badge">3</span></a>
+      <div class="nav-section-title">Platform</div>
+      <a href="donor-list.html" class="sidebar-nav-item"><i class="fas fa-users"></i>Donor Directory</a>
+      <a href="index.html#request" class="sidebar-nav-item"><i class="fas fa-hand-holding-medical"></i>Request Blood</a>
+      <a href="events.html" class="sidebar-nav-item"><i class="fas fa-calendar-alt"></i>Events</a>
+      <a href="index.html" class="sidebar-nav-item"><i class="fas fa-globe"></i>Public Site</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="Auth.logout()"><i class="fas fa-sign-out-alt"></i>Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <button class="menu-toggle" id="menu-toggle-btn"><i class="fas fa-bars"></i></button>
+      <div>
+        <div class="topbar-title">Donor Dashboard</div>
+        <div class="topbar-subtitle">Welcome back, <span class="donor-name">Sabbir</span></div>
+      </div>
+      <div class="topbar-actions">
+        <div class="dropdown">
+          <div class="topbar-icon-btn" id="notif-btn"><i class="fas fa-bell"></i><span class="notif-dot"></span></div>
+          <div class="dropdown-menu" id="notif-menu" style="min-width:280px;padding:0;">
+            <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-size:.82rem;font-weight:600;color:var(--snow);">Notifications</div>
+            <div style="padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);">
+              <div style="font-size:.82rem;color:var(--snow);">🔴 Urgent: O− needed at DMCH</div>
+              <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">5 minutes ago</div>
+            </div>
+            <div style="padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);">
+              <div style="font-size:.82rem;color:var(--snow);">✅ Your donation at Square Hospital is verified</div>
+              <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">2 days ago</div>
+            </div>
+            <div style="padding:12px 16px;">
+              <div style="font-size:.82rem;color:var(--snow);">📅 Upcoming camp at BRACU — Jun 15</div>
+              <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">3 days ago</div>
+            </div>
+          </div>
+        </div>
+        <a href="donor-profile.html" class="topbar-icon-btn"><i class="fas fa-user"></i></a>
+      </div>
+    </header>
+
+    <main class="dash-content">
+
+      <!-- Profile Completion -->
+      <div class="profile-completion reveal">
+        <div class="completion-header">
+          <div>
+            <div style="font-size:.875rem;font-weight:600;color:var(--snow);">Profile Completion</div>
+            <div style="font-size:.75rem;color:var(--muted);">Complete your profile to increase donor visibility</div>
+          </div>
+          <div class="completion-pct" id="completion-pct">75%</div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="completion-bar" style="width:75%;"></div></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:.72rem;color:#4ade80;display:flex;align-items:center;gap:4px;"><i class="fas fa-check-circle"></i>Name</span>
+          <span style="font-size:.72rem;color:#4ade80;display:flex;align-items:center;gap:4px;"><i class="fas fa-check-circle"></i>Blood Group</span>
+          <span style="font-size:.72rem;color:#4ade80;display:flex;align-items:center;gap:4px;"><i class="fas fa-check-circle"></i>Phone</span>
+          <span style="font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:4px;"><i class="fas fa-circle"></i>Photo</span>
+          <span style="font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:4px;"><i class="fas fa-circle"></i>University</span>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="stat-grid reveal">
+        <div class="stat-card">
+          <div class="stat-icon red"><i class="fas fa-droplet"></i></div>
+          <div class="stat-info"><div class="stat-value" id="total-donations-val">7</div><div class="stat-label">Total Donations</div><div class="stat-change up"><i class="fas fa-arrow-up"></i>+1 this month</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-heart-pulse"></i></div>
+          <div class="stat-info"><div class="stat-value">7</div><div class="stat-label">Lives Saved</div><div class="stat-change up"><i class="fas fa-arrow-up"></i>Each unit saves a life</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fas fa-calendar-check"></i></div>
+          <div class="stat-info"><div class="stat-value">90</div><div class="stat-label">Days Since Last Donation</div><div class="stat-change up"><i class="fas fa-check"></i>Eligible now</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow"><i class="fas fa-star"></i></div>
+          <div class="stat-info"><div class="stat-value">Hero</div><div class="stat-label">Donor Rank</div><div class="stat-change up"><i class="fas fa-trophy"></i>Top 5% donors</div></div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Eligibility + Card -->
+        <div class="col-lg-4">
+          <div class="dash-panel mb-4">
+            <div class="dash-panel-header"><div class="dash-panel-title"><i class="fas fa-clock"></i>Eligibility Status</div></div>
+            <div class="dash-panel-body" style="text-align:center;">
+              <div style="width:100px;height:100px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0 auto 12px;">
+                <svg viewBox="0 0 120 120" style="position:absolute;inset:0;transform:rotate(-90deg);">
+                  <circle fill="none" stroke="rgba(255,255,255,.06)" stroke-width="7" cx="60" cy="60" r="44"/>
+                  <circle fill="none" stroke="#22c55e" stroke-width="7" stroke-linecap="round" cx="60" cy="60" r="44" stroke-dasharray="276" stroke-dashoffset="0" id="elig-ring"/>
+                </svg>
+                <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--snow);position:relative;">✓</div>
+                <div style="font-size:.65rem;color:var(--muted);position:relative;">Ready</div>
+              </div>
+              <span class="badge badge-green" style="margin-bottom:8px;"><i class="fas fa-check-circle"></i>Eligible to Donate</span>
+              <p style="font-size:.78rem;color:var(--muted);margin:0;">Last donation: 10 Feb 2026<br/>90 days have passed.</p>
+            </div>
+          </div>
+
+          <div class="dash-panel">
+            <div class="dash-panel-header"><div class="dash-panel-title"><i class="fas fa-id-card"></i>My Donor Card</div></div>
+            <div class="dash-panel-body">
+              <div style="background:linear-gradient(145deg,#1a0005,#3d0010,#8b0000);border-radius:10px;padding:16px;text-align:center;margin-bottom:12px;">
+                <div style="font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;color:#fff;line-height:1;" class="donor-bg">O+</div>
+                <div style="font-size:.8rem;color:rgba(255,255,255,.6);margin-top:4px;" class="donor-name">Sabbir Ahmed</div>
+                <div style="font-size:.6rem;letter-spacing:.12em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:2px;">Proud Donor · Redpulse Foundation</div>
+              </div>
+              <a href="card-generator.html" class="btn-sm btn-sm-red" style="width:100%;justify-content:center;"><i class="fas fa-download"></i>Download Card</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Donation History -->
+        <div class="col-lg-8">
+          <div class="dash-panel mb-4" id="history">
+            <div class="dash-panel-header">
+              <div class="dash-panel-title"><i class="fas fa-history"></i>Donation History</div>
+              <span style="font-size:.72rem;color:var(--muted);">DRF: GET /api/donors/me/history/</span>
+            </div>
+            <div class="dash-panel-body" style="padding:0;">
+              <table class="dash-table">
+                <thead><tr><th>Date</th><th>Hospital</th><th>Units</th><th>Status</th></tr></thead>
+                <tbody id="donation-history-body">
+                  <tr><td>10 Feb 2026</td><td>Dhaka Medical College Hospital</td><td>1 unit</td><td><span class="badge badge-green"><i class="fas fa-check"></i>verified</span></td></tr>
+                  <tr><td>15 Oct 2025</td><td>Square Hospital, Panthapath</td><td>1 unit</td><td><span class="badge badge-green"><i class="fas fa-check"></i>verified</span></td></tr>
+                  <tr><td>02 Jul 2025</td><td>BIRDEM General Hospital</td><td>1 unit</td><td><span class="badge badge-green"><i class="fas fa-check"></i>verified</span></td></tr>
+                  <tr><td>19 Mar 2025</td><td>Ibn Sina Hospital</td><td>1 unit</td><td><span class="badge badge-green"><i class="fas fa-check"></i>verified</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Upcoming Events -->
+          <div class="dash-panel" id="notifications">
+            <div class="dash-panel-header"><div class="dash-panel-title"><i class="fas fa-calendar-alt"></i>Upcoming Events</div><a href="events.html" class="btn-sm btn-sm-ghost">View All</a></div>
+            <div class="dash-panel-body">
+              <div class="dash-alert info"><i class="fas fa-calendar dash-alert-icon"></i><div><strong>Dhaka Summer Donation Drive</strong><br/><span style="font-size:.8rem;">Jun 15 · TSC, Dhaka University · 9 AM – 4 PM</span></div></div>
+              <div class="dash-alert warning"><i class="fas fa-calendar dash-alert-icon"></i><div><strong>Youth Blood Hero Workshop</strong><br/><span style="font-size:.8rem;">Jun 22 · BUET Campus, Polashi · 10 AM – 1 PM</span></div></div>
+              <div class="dash-alert success"><i class="fas fa-calendar dash-alert-icon"></i><div><strong>Corporate Blood Donation Day</strong><br/><span style="font-size:.8rem;">Jul 5 · Bashundhara City · 8 AM – 3 PM</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Availability Toggle -->
+      <div class="dash-panel mt-4 reveal">
+        <div class="dash-panel-header">
+          <div class="dash-panel-title"><i class="fas fa-toggle-on"></i>My Availability</div>
+          <span style="font-size:.72rem;color:var(--muted);">DRF: PATCH /api/donors/me/</span>
+        </div>
+        <div class="dash-panel-body">
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <div>
+              <div style="font-size:.9rem;font-weight:600;color:var(--snow);">Mark yourself as available for donations</div>
+              <div style="font-size:.78rem;color:var(--muted);margin-top:4px;">Moderators will only contact you if you are marked available and eligible (90+ days since last donation).</div>
+            </div>
+            <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+              <span style="font-size:.875rem;color:var(--muted);">Unavailable</span>
+              <div style="position:relative;width:52px;height:28px;">
+                <input type="checkbox" checked id="avail-toggle" onchange="toggleAvailability(this)" style="opacity:0;width:0;height:0;position:absolute;"/>
+                <span id="avail-slider" style="position:absolute;inset:0;background:rgba(34,197,94,.3);border:1px solid #22c55e;border-radius:28px;cursor:pointer;transition:.3s;"></span>
+                <span id="avail-knob" style="position:absolute;width:22px;height:22px;left:3px;top:2px;background:#22c55e;border-radius:50%;transition:.3s;transform:translateX(24px);"></span>
+              </div>
+              <span style="font-size:.875rem;color:#4ade80;">Available</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div id="edit-profile-modal" style="position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.3s;">
+  <div style="background:var(--ink-mid);border:1px solid var(--border);border-radius:20px;padding:32px;max-width:500px;width:90%;max-height:85vh;overflow-y:auto;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h4 style="color:var(--snow);font-family:var(--font-display);margin:0;">Edit Profile</h4>
+      <button onclick="closeEditProfile()" style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;"><i class="fas fa-times"></i></button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div><label style="font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:5px;">Full Name</label><input class="dash-input" type="text" value="Sabbir Ahmed" name="full_name"/></div>
+      <div><label style="font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:5px;">Phone</label><input class="dash-input" type="tel" value="01XXXXXXXXX" name="phone"/></div>
+      <div><label style="font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:5px;">Area / Thana</label><input class="dash-input" type="text" value="Mirpur, Dhaka" name="area"/></div>
+      <button onclick="closeEditProfile();showToast('Profile updated!','success')" style="background:var(--crimson);border:none;border-radius:10px;color:#fff;padding:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-body);"><i class="fas fa-save"></i>Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script>
+document.getElementById('menu-toggle-btn')?.addEventListener('click', () => {
+  document.querySelector('.dash-sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('active');
+});
+document.getElementById('avail-toggle')?.addEventListener('change', function() {
+  const knob   = document.getElementById('avail-knob');
+  const slider = document.getElementById('avail-slider');
+  if (this.checked) {
+    knob.style.transform   = 'translateX(24px)';
+    knob.style.background  = '#22c55e';
+    slider.style.background = 'rgba(34,197,94,.3)';
+    slider.style.borderColor = '#22c55e';
+    showToast('Status set to Available', 'success');
+  } else {
+    knob.style.transform   = 'translateX(0)';
+    knob.style.background  = '#888';
+    slider.style.background = 'rgba(255,255,255,.12)';
+    slider.style.borderColor = 'transparent';
+    showToast('Status set to Unavailable', 'info');
+  }
+});
+</script>
+</body>
+</html>
